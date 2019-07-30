@@ -1,0 +1,43 @@
+﻿Qty Value                Device               Package
+1                        CRYSTALCTS406        CTS406 
+1                        DIODE-DO-214AC       DO-214AC
+1                        L0207/10             0207/10 
+5                        MPSA42-NPN-TO92-EBC  TO92-EBC
+1   1.3nF                C-EUC0805            C0805   
+4   100K                 R-EU_R1206           R1206   
+1   100nF                C-EUC0402            C0402   
+1   100nF                C-EUC0603            C0603   
+21  100nF                C-EUC0805            C0805   
+1   10K                  TRIM_EU-B25P         B25P    
+2   10K                  TRIM_US-B25P         B25P    
+7   10k                  R-EU_R0805           R0805   
+2   10nF                 C-EUC0805            C0805   
+3   10uF                 CPOL-USE2.5-5        E2,5-5  
+3   180K                 R-EU_R1206           R1206   
+1   1K                   R-EU_R0805           R0805   
+2   1N4004               1N4004               DO41-10 
+2   22pF                 C-EUC0805            C0805   
+3   3.3K                 R-EU_R0805           R0805   
+1   3.3K                 R-EU_R1206           R1206   
+1   30K                  R-EU_R0805           R0805   
+1   500                  R-EU_R0805           R0805   
+8   600K                 R-EU_R1206           R1206   
+7   60K                  R-EU_R1206           R1206   
+1   70V                  DIODE-ZENERPTH       DIODE-ZENER
+7   74141N               74141N               DIL16      
+1   74HC595D             74HC595D             SO16       
+1   7805TV               7805TV               TO220V     
+1   85K                  R-EU_R1206           R1206      
+1   ATXMEGA32A4U-AU      ATXMEGA32A4U-AU      TQFP-44A-44
+1   BHSD-2032-SM         BHSD-2032-SM         BHSD-2032-SM
+1   DC21P                DC21P                DCSKTP      
+1   DS3231/SO            DS3231/SO            SO16W       
+6   IN-14                IN-14                IN-14       
+1   IN-19A               IN-19A               IN-19       
+3   IN-3                 IN-3                 IN-3        
+1   LD1117VXX-V          LD1117VXX-V          TO220-V     
+1   LM555D               LM555D               SO08        
+1   MINI-USB-32005-301   MINI-USB-32005-301   32005-301   
+1   SHT21                SHT21                SHT21       
+2   SN74ALVC164245DGGR   SN74ALVC164245DGGR   SOP50P810X120-48N 
+1   XMEGA-PDI-675869-131 XMEGA-PDI-675869-131 HDR-75869-131  
