@@ -6509,7 +6509,7 @@ design rules under a new name.</description>
 <wire x1="153.035" y1="26.67" x2="152.87625" y2="26.82875" width="0.3048" layer="1"/>
 <wire x1="152.87625" y1="26.82875" x2="150.97125" y2="26.82875" width="0.3048" layer="1"/>
 </signal>
-<signal name="N$149">
+<signal name="DATA">
 <contactref element="IC10" pad="14"/>
 <contactref element="ATXMEGA32A4U" pad="33"/>
 <wire x1="154.2034" y1="27.305" x2="151.14158125" y2="27.305" width="0.3048" layer="1"/>
@@ -6577,7 +6577,7 @@ design rules under a new name.</description>
 <wire x1="70.5875" y1="97.0525" x2="67.31" y2="100.33" width="0.3048" layer="1"/>
 <wire x1="70.5875" y1="94.9325" x2="70.5875" y2="97.0525" width="0.3048" layer="1"/>
 </signal>
-<signal name="N$137">
+<signal name="LATCH">
 <contactref element="ATXMEGA32A4U" pad="32"/>
 <contactref element="IC10" pad="12"/>
 <wire x1="154.2034" y1="24.765" x2="149.83385" y2="24.765" width="0.3048" layer="1"/>

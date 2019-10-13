@@ -136,6 +136,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="conf_usb.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="display.c">
       <SubType>compile</SubType>
     </Compile>
@@ -161,6 +164,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ShiftReg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sht20.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sht20.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

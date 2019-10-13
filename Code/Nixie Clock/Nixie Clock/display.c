@@ -10,9 +10,12 @@
 
 #include "display.h"
 #include "ShiftReg.h"
+#include "ds3231.h"
 
 // array to print 0-9 on tube
-const unsigned char reMapBCD[15] = {8,0,9,1,14,6,10,2,12,4,15,15,15,15,15};
+const unsigned char reMapBCD[MAPNUM] = {8,0,9,1,14,6,10,2,12,4};
+const unsigned char reMapBCDTube[MAPNUM] = {'n', 'k', 'm', 'u', 'c', 'M', '%', 'p', 2, 2};
+	
 volatile unsigned char hour, minute;
 
 void initDisplay()
@@ -23,31 +26,31 @@ void initDisplay()
 	PORTB_DIR = SECONDTUBE;
 	
 	PORTD_DIRSET = PIN4_bm;	// dot point
-}
-/*
-//check hours and if minute has passed once
-void checkRefesh()
-{
-	unsigned char seconds = 0;
 	
-	if(hour != HOURS)
+	characterTube(2);
+}
+
+//check hours and if minute has passed once
+void checkRefesh(unsigned char *time)
+{
+	static unsigned char last_min, last_hour;
+	
+	if(*(time + RTCHOUR) != last_hour)
 	{
-		while(seconds < 60)
+		last_min = *(time + RTCMINUTE);
+		
+		while (*(rtc_get_time() + RTCMINUTE) == last_min)
 		{
-			if(PORTD.IN & PULSE)
-			seconds++;
 			cathodeRefresh();
-			
 		}
 	}
+	
+	last_hour = *(time + RTCHOUR);
 }
-*/
+
 /* Function:	cathodeRefresh
 
 	Flashes all digits of the nixie tube to prevent cathode poisoning.
-	
-	
-	MISSING CHARACTER TUBE
 */
 void cathodeRefresh()
 {
@@ -57,12 +60,13 @@ void cathodeRefresh()
 	//flash numbers 0-9 on each digit
 	for(i = 0; i < 10; i++)
 	{
-		for(j = 0; j < 10; j++)
+		for(j = 0; j < 6; j++)
 		{
 			val[j] = i;
 		}
 		display(val);
-		_delay_ms(100);
+		characterTube(reMapBCDTube[i]);
+		_delay_ms(400);
 	}
 	
 	//turn off all digits
@@ -70,7 +74,7 @@ void cathodeRefresh()
 	
 	// dot point in each tube
 	DOTPOINTHIGH;
-	_delay_ms(100);
+	_delay_ms(400);
 	DOTPOINTLOW;
 }
 
@@ -89,54 +93,37 @@ void fifthTube(unsigned char byte)
 	//write data to pins 5-7
 	sendData(byte,0);
 }
-/*
-k
-u
-*C
-%
-M
-p
-
-missing
-n	set pinm 2 & 3 high pin 3 = PIN4, pin 2 is 16
-*/
 
 void characterTube(unsigned char byte)
 {
-	const unsigned char reMapBCDTube[8] = {0};
-	//sendData(0x00, 0);
-	
-	//PORTC.OUTSET = PIN4_bm;
-	//sendData(0x18,1);
-	//sendData(0x10, 0);
-	
-	PORTC.OUTCLR = PIN5_bm;
-	PORTC.OUTCLR = PIN4_bm;
-	sendData(0x18,1);
-	
+	unsigned char i;//, tube;
+
+	for(i = 0; i < MAPNUM; i++)
+	{
+		if(byte == reMapBCDTube[i])
+		{
+			byte = i;
+			break;
+		}
+	}
 	
 	if(byte & 0x02)
 		PORTC.OUTSET = PIN5_bm;
-		
-		
+	else
+		PORTC.OUTCLR = PIN5_bm;
+	
+	sendData(0x18,1);
+	
 	if((byte & 0x04) || (byte & 0x08))
 	{
 		//send to 2 for 0x08, send to pin 4 for 0x04
 			sendData((byte & 0x0C) << 1, 0);
 	}
-	
 		
 	if(byte & 0x01)	//pin 3
 		PORTC.OUTSET = PIN4_bm;
-
-	//if(byte & 0x08);
-		//sendData(1 << 4,0);
-		//PORTC.OUT = PIN4_bm;
-		
-	//PORTC.OUTSET = PIN4_bm; = k
-	//PORTC.OUTSET = PIN5_bm; = blank
-	
-	//sendData(1 << 3, 0);
+	else
+		PORTC.OUTCLR = PIN4_bm;
 }
 // SEE IF FIFTHTUBE IS STILL BUGGED (FLASHING 1)
 //set displays to display nothing
@@ -154,6 +141,7 @@ void clearDisplay()
 	fifthTube(TUBEOFF);	//tube 5
 	
 	//character tube
+	characterTube(TUBEOFF);
 }
 
 /*	Function: display
@@ -182,8 +170,8 @@ void display(unsigned char *number)
 	//prevent flashing of 5th element '1'
 	
 	if(*(number + 4) != last_num)
-		fifthTube(reMapBCD[*(number + 4)]);	//tube 5	CAUSES FLASHING
-	//last_num = reMapBCD[*(number + 4)];
+		fifthTube(reMapBCD[*(number + 4)]);	//tube 5
+		
 	last_num = *(number + 4);
 }
 

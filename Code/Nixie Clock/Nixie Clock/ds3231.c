@@ -77,3 +77,11 @@ void rtc_set_time(unsigned char* setTime)
 	}
 	i2c_stop();
 }
+
+//convert time from base 10 to DS3231 format and send it to rtc_set_time
+void rtc_convert_time(unsigned char *time)
+{
+	
+}
+
+//void rtc_convert_

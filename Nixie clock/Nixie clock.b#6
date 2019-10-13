@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="12.5" unitdist="mil" unit="mil" style="dots" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="12.5" unitdist="mil" unit="mil" style="dots" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -6206,14 +6206,11 @@ design rules under a new name.</description>
 <signal name="B14">
 <contactref element="IC7" pad="27"/>
 <contactref element="ATXMEGA32A4U" pad="12"/>
-<wire x1="128.9172" y1="4.445" x2="128.9172" y2="4.4572" width="0.3048" layer="1"/>
-<wire x1="130.26" y1="5.8" x2="130.26" y2="7.43" width="0.3048" layer="1"/>
-<wire x1="128.9172" y1="4.4572" x2="130.26" y2="5.8" width="0.3048" layer="1"/>
 <wire x1="65.1" y1="21.612" x2="65.1" y2="19.27393125" width="0.3048" layer="1"/>
-<wire x1="83.761634375" y1="0.612296875" x2="125.095459375" y2="0.612296875" width="0.3048" layer="1"/>
-<wire x1="128.9172" y1="4.4340375" x2="128.9172" y2="4.445" width="0.3048" layer="1"/>
-<wire x1="125.095459375" y1="0.612296875" x2="128.9172" y2="4.4340375" width="0.3048" layer="1"/>
-<wire x1="65.1" y1="19.27393125" x2="83.761634375" y2="0.612296875" width="0.3048" layer="1"/>
+<wire x1="125.095459375" y1="0.612296875" x2="83.761634375" y2="0.612296875" width="0.3048" layer="1"/>
+<wire x1="83.761634375" y1="0.612296875" x2="65.1" y2="19.27393125" width="0.3048" layer="1"/>
+<wire x1="130.26" y1="5.7768375" x2="125.095459375" y2="0.612296875" width="0.3048" layer="1"/>
+<wire x1="130.26" y1="7.43" x2="130.26" y2="5.7768375" width="0.3048" layer="1"/>
 </signal>
 <signal name="B13">
 <contactref element="IC7" pad="29"/>
@@ -6237,100 +6234,103 @@ design rules under a new name.</description>
 <contactref element="IC7" pad="32"/>
 <contactref element="ATXMEGA32A4U" pad="7"/>
 <wire x1="67.6" y1="21.612" x2="67.6" y2="18.713675" width="0.3048" layer="1"/>
-<wire x1="67.6" y1="18.713675" x2="84.230875" y2="2.0828" width="0.3048" layer="1"/>
-<wire x1="122.34385" y1="2.0828" x2="125.26" y2="4.99895" width="0.3048" layer="1"/>
 <wire x1="125.26" y1="4.99895" x2="125.26" y2="5.63" width="0.3048" layer="1"/>
-<wire x1="84.230875" y1="2.0828" x2="122.34385" y2="2.0828" width="0.3048" layer="1"/>
+<wire x1="67.6" y1="18.713675" x2="84.329778125" y2="1.983896875" width="0.3048" layer="1"/>
+<wire x1="84.329778125" y1="1.983896875" x2="122.244946875" y2="1.983896875" width="0.3048" layer="1"/>
+<wire x1="122.244946875" y1="1.983896875" x2="125.26" y2="4.99895" width="0.3048" layer="1"/>
 </signal>
 <signal name="B10">
 <contactref element="IC7" pad="33"/>
 <contactref element="ATXMEGA32A4U" pad="6"/>
-<wire x1="122.00105" y1="2.54" x2="124.46" y2="4.99895" width="0.3048" layer="1"/>
-<wire x1="124.46" y1="4.99895" x2="124.46" y2="5.63" width="0.3048" layer="1"/>
-<wire x1="84.42025625" y1="2.54" x2="122.00105" y2="2.54" width="0.3048" layer="1"/>
 <wire x1="68.1" y1="21.612" x2="68.1" y2="18.86025625" width="0.3048" layer="1"/>
-<wire x1="68.1" y1="18.86025625" x2="84.42025625" y2="2.54" width="0.3048" layer="1"/>
+<wire x1="122.055565625" y1="2.441096875" x2="124.46" y2="4.84553125" width="0.3048" layer="1"/>
+<wire x1="124.46" y1="4.84553125" x2="124.46" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="68.1" y1="18.86025625" x2="84.519159375" y2="2.441096875" width="0.3048" layer="1"/>
+<wire x1="84.519159375" y1="2.441096875" x2="122.055565625" y2="2.441096875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B9">
 <contactref element="IC7" pad="35"/>
 <contactref element="ATXMEGA32A4U" pad="5"/>
 <wire x1="69.1" y1="21.612" x2="69.1" y2="18.5068375" width="0.3048" layer="1"/>
-<wire x1="69.1" y1="18.5068375" x2="83.80841875" y2="3.79841875" width="0.3048" layer="1"/>
-<wire x1="83.80841875" y1="3.79841875" x2="84.4032375" y2="3.2036" width="0.3048" layer="1"/>
-<wire x1="123.66" y1="4.90341875" x2="123.66" y2="5.63" width="0.3048" layer="1"/>
-<wire x1="84.4032375" y1="3.2036" x2="121.96018125" y2="3.2036" width="0.3048" layer="1"/>
-<wire x1="121.96018125" y1="3.2036" x2="123.66" y2="4.90341875" width="0.3048" layer="1"/>
+<wire x1="84.708540625" y1="2.898296875" x2="121.866184375" y2="2.898296875" width="0.3048" layer="1"/>
+<wire x1="121.866184375" y1="2.898296875" x2="123.66" y2="4.6921125" width="0.3048" layer="1"/>
+<wire x1="123.66" y1="4.6921125" x2="123.66" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="69.1" y1="18.5068375" x2="84.708540625" y2="2.898296875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B8">
 <contactref element="IC7" pad="36"/>
 <contactref element="ATXMEGA32A4U" pad="4"/>
 <wire x1="69.6" y1="21.612" x2="69.6" y2="18.65341875" width="0.3048" layer="1"/>
-<wire x1="122.86" y1="4.75" x2="122.86" y2="5.63" width="0.3048" layer="1"/>
-<wire x1="69.6" y1="18.65341875" x2="84.59261875" y2="3.6608" width="0.3048" layer="1"/>
-<wire x1="84.59261875" y1="3.6608" x2="121.7708" y2="3.6608" width="0.3048" layer="1"/>
-<wire x1="121.7708" y1="3.6608" x2="122.86" y2="4.75" width="0.3048" layer="1"/>
+<wire x1="84.897921875" y1="3.355496875" x2="121.676803125" y2="3.355496875" width="0.3048" layer="1"/>
+<wire x1="121.676803125" y1="3.355496875" x2="122.86" y2="4.53869375" width="0.3048" layer="1"/>
+<wire x1="122.86" y1="4.53869375" x2="122.86" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="69.6" y1="18.65341875" x2="84.897921875" y2="3.355496875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B7">
 <contactref element="IC7" pad="37"/>
 <contactref element="ATXMEGA32A4U" pad="3"/>
-<wire x1="70.1" y1="21.612" x2="70.1" y2="19.05" width="0.3048" layer="1"/>
-<wire x1="85.032" y1="4.118" x2="121.17905" y2="4.118" width="0.3048" layer="1"/>
-<wire x1="121.17905" y1="4.118" x2="122.06" y2="4.99895" width="0.3048" layer="1"/>
-<wire x1="70.1" y1="19.05" x2="85.032" y2="4.118" width="0.3048" layer="1"/>
-<wire x1="122.06" y1="4.99895" x2="122.06" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="70.1" y1="21.612" x2="70.1" y2="18.8" width="0.3048" layer="1"/>
+<wire x1="85.087303125" y1="3.812696875" x2="121.487421875" y2="3.812696875" width="0.3048" layer="1"/>
+<wire x1="121.487421875" y1="3.812696875" x2="122.06" y2="4.385275" width="0.3048" layer="1"/>
+<wire x1="122.06" y1="4.385275" x2="122.06" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="70.1" y1="18.8" x2="85.087303125" y2="3.812696875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B6">
 <contactref element="IC7" pad="38"/>
 <contactref element="ATXMEGA32A4U" pad="2"/>
-<wire x1="70.6" y1="21.612" x2="70.6" y2="19.57" width="0.3048" layer="1"/>
-<wire x1="85.5948" y1="4.5752" x2="120.83625" y2="4.5752" width="0.3048" layer="1"/>
-<wire x1="120.83625" y1="4.5752" x2="121.26" y2="4.99895" width="0.3048" layer="1"/>
-<wire x1="70.6" y1="19.57" x2="85.5948" y2="4.5752" width="0.3048" layer="1"/>
-<wire x1="121.26" y1="4.99895" x2="121.26" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="70.6" y1="21.612" x2="70.6" y2="18.94658125" width="0.3048" layer="1"/>
+<wire x1="85.276684375" y1="4.269896875" x2="120.9675" y2="4.269896875" width="0.3048" layer="1"/>
+<wire x1="120.9675" y1="4.269896875" x2="121.26" y2="4.562396875" width="0.3048" layer="1"/>
+<wire x1="121.26" y1="4.562396875" x2="121.26" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="70.6" y1="18.94658125" x2="85.276684375" y2="4.269896875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B5">
 <contactref element="IC7" pad="40"/>
 <contactref element="ATXMEGA32A4U" pad="1"/>
-<wire x1="71.6" y1="21.612" x2="71.6" y2="19.84" width="0.3048" layer="1"/>
-<wire x1="85.81" y1="5.63" x2="120.46" y2="5.63" width="0.3048" layer="1"/>
-<wire x1="71.6" y1="19.84" x2="85.81" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="71.6" y1="21.612" x2="71.6" y2="18.5931625" width="0.3048" layer="1"/>
+<wire x1="85.466065625" y1="4.727096875" x2="120.3325" y2="4.727096875" width="0.3048" layer="1"/>
+<wire x1="120.3325" y1="4.727096875" x2="120.46" y2="4.854596875" width="0.3048" layer="1"/>
+<wire x1="120.46" y1="4.854596875" x2="120.46" y2="5.63" width="0.3048" layer="1"/>
+<wire x1="71.6" y1="18.5931625" x2="85.466065625" y2="4.727096875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B4">
 <contactref element="IC7" pad="41"/>
 <contactref element="ATXMEGA32A4U" pad="44"/>
-<wire x1="84.9" y1="7.43" x2="118.66" y2="7.43" width="0.3048" layer="1"/>
-<wire x1="72.1" y1="21.612" x2="72.1" y2="20.23" width="0.3048" layer="1"/>
-<wire x1="72.1" y1="20.23" x2="84.9" y2="7.43" width="0.3048" layer="1"/>
+<wire x1="72.1" y1="21.612" x2="72.1" y2="18.73974375" width="0.3048" layer="1"/>
+<wire x1="72.1" y1="18.73974375" x2="83.40974375" y2="7.43" width="0.3048" layer="1"/>
+<wire x1="83.40974375" y1="7.43" x2="118.66" y2="7.43" width="0.3048" layer="1"/>
 </signal>
 <signal name="B3">
 <contactref element="IC7" pad="43"/>
 <contactref element="ATXMEGA32A4U" pad="43"/>
-<wire x1="73.1" y1="21.612" x2="73.1" y2="20.23341875" width="0.3048" layer="1"/>
-<wire x1="85.10341875" y1="8.23" x2="118.66" y2="8.23" width="0.3048" layer="1"/>
-<wire x1="73.1" y1="20.23341875" x2="85.10341875" y2="8.23" width="0.3048" layer="1"/>
+<wire x1="73.1" y1="21.612" x2="73.1" y2="18.386325" width="0.3048" layer="1"/>
+<wire x1="73.1" y1="18.386325" x2="83.256325" y2="8.23" width="0.3048" layer="1"/>
+<wire x1="83.256325" y1="8.23" x2="118.66" y2="8.23" width="0.3048" layer="1"/>
 </signal>
 <signal name="B2">
 <contactref element="IC7" pad="44"/>
 <contactref element="ATXMEGA32A4U" pad="42"/>
-<wire x1="73.6" y1="21.612" x2="73.6" y2="20.38" width="0.3048" layer="1"/>
-<wire x1="73.6" y1="20.38" x2="84.95" y2="9.03" width="0.3048" layer="1"/>
-<wire x1="84.95" y1="9.03" x2="118.66" y2="9.03" width="0.3048" layer="1"/>
+<wire x1="83.10290625" y1="9.03" x2="73.5572" y2="18.57570625" width="0.3048" layer="1"/>
+<wire x1="73.5572" y1="18.57570625" x2="73.5572" y2="21.5692" width="0.3048" layer="1"/>
+<wire x1="73.5572" y1="21.5692" x2="73.6" y2="21.612" width="0.3048" layer="1"/>
+<wire x1="118.66" y1="9.03" x2="83.10290625" y2="9.03" width="0.3048" layer="1"/>
 </signal>
 <signal name="B1">
 <contactref element="IC7" pad="46"/>
 <contactref element="ATXMEGA32A4U" pad="41"/>
 <wire x1="74.6" y1="21.612" x2="74.6" y2="20.02658125" width="0.3048" layer="1"/>
-<wire x1="84.79658125" y1="9.83" x2="118.66" y2="9.83" width="0.3048" layer="1"/>
-<wire x1="74.6" y1="20.02658125" x2="84.79658125" y2="9.83" width="0.3048" layer="1"/>
+<wire x1="82.9494875" y1="9.83" x2="118.66" y2="9.83" width="0.3048" layer="1"/>
+<wire x1="82.9494875" y1="9.83" x2="74.6" y2="18.1794875" width="0.3048" layer="1"/>
+<wire x1="74.6" y1="21.612" x2="74.6" y2="18.1794875" width="0.3048" layer="1"/>
 </signal>
 <signal name="B0">
 <contactref element="IC7" pad="47"/>
 <contactref element="ATXMEGA32A4U" pad="40"/>
-<wire x1="75.1" y1="21.612" x2="75.1" y2="20.1731625" width="0.3048" layer="1"/>
-<wire x1="115.8875" y1="10.3125" x2="84.9606625" y2="10.3125" width="0.3048" layer="1"/>
-<wire x1="84.9606625" y1="10.3125" x2="75.1" y2="20.1731625" width="0.3048" layer="1"/>
 <wire x1="118.66" y1="10.63" x2="116.205" y2="10.63" width="0.3048" layer="1"/>
-<wire x1="116.205" y1="10.63" x2="115.8875" y2="10.3125" width="0.3048" layer="1"/>
+<wire x1="115.8875" y1="10.3125" x2="116.205" y2="10.63" width="0.3048" layer="1"/>
+<wire x1="75.1" y1="21.612" x2="75.1" y2="18.32606875" width="0.3048" layer="1"/>
+<wire x1="75.1" y1="18.32606875" x2="83.11356875" y2="10.3125" width="0.3048" layer="1"/>
+<wire x1="83.11356875" y1="10.3125" x2="115.8875" y2="10.3125" width="0.3048" layer="1"/>
 </signal>
 <signal name="A0">
 <contactref element="ATXMEGA32A4U" pad="14"/>
@@ -6691,10 +6691,10 @@ design rules under a new name.</description>
 <wire x1="130.26" y1="8.23" x2="131.47" y2="8.23" width="0.3048" layer="1"/>
 <wire x1="132.08" y1="7.62" x2="131.47" y2="8.23" width="0.3048" layer="1"/>
 <wire x1="64.6" y1="19.12735" x2="64.6" y2="21.612" width="0.3048" layer="1"/>
-<wire x1="83.67655" y1="0.0508" x2="125.73" y2="0.0508" width="0.3048" layer="1"/>
-<wire x1="83.67655" y1="0.0508" x2="64.6" y2="19.12735" width="0.3048" layer="1"/>
-<wire x1="125.73" y1="0.0508" x2="132.08" y2="6.4008" width="0.3048" layer="1"/>
-<wire x1="132.08" y1="6.4008" x2="132.08" y2="7.62" width="0.3048" layer="1"/>
+<wire x1="83.572253125" y1="0.155096875" x2="64.6" y2="19.12735" width="0.3048" layer="1"/>
+<wire x1="83.572253125" y1="0.155096875" x2="125.284840625" y2="0.155096875" width="0.3048" layer="1"/>
+<wire x1="132.08" y1="6.95025625" x2="132.08" y2="7.62" width="0.3048" layer="1"/>
+<wire x1="125.284840625" y1="0.155096875" x2="132.08" y2="6.95025625" width="0.3048" layer="1"/>
 </signal>
 <signal name="A2">
 <contactref element="ATXMEGA32A4U" pad="16"/>

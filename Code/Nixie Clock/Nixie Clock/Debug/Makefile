@@ -41,7 +41,8 @@ C_SRCS +=  \
 ../ds3231.c \
 ../i2c.c \
 ../main.c \
-../ShiftReg.c
+../ShiftReg.c \
+../sht20.c
 
 
 PREPROCESSING_SRCS += 
@@ -55,28 +56,32 @@ display.o \
 ds3231.o \
 i2c.o \
 main.o \
-ShiftReg.o
+ShiftReg.o \
+sht20.o
 
 OBJS_AS_ARGS +=  \
 display.o \
 ds3231.o \
 i2c.o \
 main.o \
-ShiftReg.o
+ShiftReg.o \
+sht20.o
 
 C_DEPS +=  \
 display.d \
 ds3231.d \
 i2c.d \
 main.d \
-ShiftReg.d
+ShiftReg.d \
+sht20.d
 
 C_DEPS_AS_ARGS +=  \
 display.d \
 ds3231.d \
 i2c.d \
 main.d \
-ShiftReg.d
+ShiftReg.d \
+sht20.d
 
 OUTPUT_FILE_PATH +=Nixie\ Clock.elf
 
@@ -121,6 +126,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./ShiftReg.o: .././ShiftReg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega32a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega32a4u" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./sht20.o: .././sht20.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega32a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega32a4u" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

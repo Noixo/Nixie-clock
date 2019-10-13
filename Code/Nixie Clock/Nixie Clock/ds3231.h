@@ -18,6 +18,7 @@ extern void rtc_set_time(unsigned char *time);
 
 extern void rtc_init();
 extern void rtc_ctrl(unsigned char mask);
+extern void rtc_convert_time(unsigned char *time);
 //extern void time rtc_get_time();
 
 #endif

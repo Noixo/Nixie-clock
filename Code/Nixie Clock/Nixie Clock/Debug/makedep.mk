@@ -12,3 +12,5 @@ main.c
 
 ShiftReg.c
 
+sht20.c
+

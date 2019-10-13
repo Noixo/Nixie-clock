@@ -3,31 +3,31 @@ Nixie Clock.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000004e0  00000000  00000000  00000074  2**1
+  0 .text         00000836  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00802000  00802000  00000554  2**0
+  1 .data         00000014  00802000  00000836  000008ca  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000001  00802000  00802000  00000554  2**0
+  2 .bss          0000000e  00802014  00802014  000008de  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000554  2**0
+  3 .comment      00000030  00000000  00000000  000008de  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000584  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000910  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000130  00000000  00000000  000005c4  2**0
+  5 .debug_aranges 00000148  00000000  00000000  00000950  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00003fcd  00000000  00000000  000006f4  2**0
+  6 .debug_info   000041c0  00000000  00000000  00000a98  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00002eb3  00000000  00000000  000046c1  2**0
+  7 .debug_abbrev 00002f04  00000000  00000000  00004c58  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001147  00000000  00000000  00007574  2**0
+  8 .debug_line   00001238  00000000  00000000  00007b5c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000290  00000000  00000000  000086bc  2**2
+  9 .debug_frame  000002e8  00000000  00000000  00008d94  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001f7b  00000000  00000000  0000894c  2**0
+ 10 .debug_str    00001fc0  00000000  00000000  0000907c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000095c  00000000  00000000  0000a8c7  2**0
+ 11 .debug_loc    00000adc  00000000  00000000  0000b03c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000e0  00000000  00000000  0000b223  2**0
+ 12 .debug_ranges 000000f8  00000000  00000000  0000bb18  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -173,18 +173,18 @@ Disassembly of section .text:
  208:	10 e2       	ldi	r17, 0x20	; 32
  20a:	a0 e0       	ldi	r26, 0x00	; 0
  20c:	b0 e2       	ldi	r27, 0x20	; 32
- 20e:	e0 ee       	ldi	r30, 0xE0	; 224
- 210:	f4 e0       	ldi	r31, 0x04	; 4
+ 20e:	e6 e3       	ldi	r30, 0x36	; 54
+ 210:	f8 e0       	ldi	r31, 0x08	; 8
  212:	02 c0       	rjmp	.+4      	; 0x218 <__do_copy_data+0x10>
  214:	05 90       	lpm	r0, Z+
  216:	0d 92       	st	X+, r0
- 218:	a0 30       	cpi	r26, 0x00	; 0
+ 218:	a4 31       	cpi	r26, 0x14	; 20
  21a:	b1 07       	cpc	r27, r17
  21c:	d9 f7       	brne	.-10     	; 0x214 <__do_copy_data+0xc>
 
 0000021e <__do_clear_bss>:
  21e:	20 e2       	ldi	r18, 0x20	; 32
- 220:	a0 e0       	ldi	r26, 0x00	; 0
+ 220:	a4 e1       	ldi	r26, 0x14	; 20
  222:	b0 e2       	ldi	r27, 0x20	; 32
  224:	01 c0       	rjmp	.+2      	; 0x228 <.do_clear_bss_start>
 
@@ -192,541 +192,1324 @@ Disassembly of section .text:
  226:	1d 92       	st	X+, r1
 
 00000228 <.do_clear_bss_start>:
- 228:	a1 30       	cpi	r26, 0x01	; 1
+ 228:	a2 32       	cpi	r26, 0x22	; 34
  22a:	b2 07       	cpc	r27, r18
  22c:	e1 f7       	brne	.-8      	; 0x226 <.do_clear_bss_loop>
- 22e:	0e 94 fa 01 	call	0x3f4	; 0x3f4 <main>
- 232:	0c 94 6e 02 	jmp	0x4dc	; 0x4dc <_exit>
+ 22e:	0e 94 ae 03 	call	0x75c	; 0x75c <main>
+ 232:	0c 94 19 04 	jmp	0x832	; 0x832 <_exit>
 
 00000236 <__bad_interrupt>:
  236:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-0000023a <initDisplay>:
+0000023a <fifthTube>:
+	_delay_ms(400);
+	DOTPOINTLOW;
+}
+
+void fifthTube(unsigned char byte)
+{		   
+ 23a:	cf 93       	push	r28
+	PORTD.OUTCLR = PIN2_bm;
+ 23c:	94 e0       	ldi	r25, 0x04	; 4
+ 23e:	90 93 66 06 	sts	0x0666, r25	; 0x800666 <__TEXT_REGION_LENGTH__+0x700666>
+	
+	if(byte & 0x01)	//0001
+ 242:	80 fd       	sbrc	r24, 0
+		PORTD.OUTSET = PIN2_bm;
+ 244:	90 93 65 06 	sts	0x0665, r25	; 0x800665 <__TEXT_REGION_LENGTH__+0x700665>
+		
+	byte >>= 1;
+ 248:	c8 2f       	mov	r28, r24
+ 24a:	c6 95       	lsr	r28
+	
 	// clear pins 5-7
 	sendData(0x07, 1);
+ 24c:	61 e0       	ldi	r22, 0x01	; 1
+ 24e:	87 e0       	ldi	r24, 0x07	; 7
+ 250:	0e 94 db 03 	call	0x7b6	; 0x7b6 <sendData>
 	
 	//write data to pins 5-7
 	sendData(byte,0);
+ 254:	60 e0       	ldi	r22, 0x00	; 0
+ 256:	8c 2f       	mov	r24, r28
+ 258:	0e 94 db 03 	call	0x7b6	; 0x7b6 <sendData>
 }
- 23a:	8f ef       	ldi	r24, 0xFF	; 255
- 23c:	80 93 40 06 	sts	0x0640, r24	; 0x800640 <__TEXT_REGION_LENGTH__+0x700640>
- 240:	97 e0       	ldi	r25, 0x07	; 7
- 242:	90 93 60 06 	sts	0x0660, r25	; 0x800660 <__TEXT_REGION_LENGTH__+0x700660>
- 246:	80 93 00 06 	sts	0x0600, r24	; 0x800600 <__TEXT_REGION_LENGTH__+0x700600>
- 24a:	8f e0       	ldi	r24, 0x0F	; 15
- 24c:	80 93 20 06 	sts	0x0620, r24	; 0x800620 <__TEXT_REGION_LENGTH__+0x700620>
- 250:	80 e1       	ldi	r24, 0x10	; 16
- 252:	80 93 61 06 	sts	0x0661, r24	; 0x800661 <__TEXT_REGION_LENGTH__+0x700661>
- 256:	08 95       	ret
+ 25c:	cf 91       	pop	r28
+ 25e:	08 95       	ret
 
-00000258 <characterTube>:
-missing
-n	set pinm 2 & 3 high pin 3 = PIN4, pin 2 is 16
-*/
+00000260 <characterTube>:
 
 void characterTube(unsigned char byte)
 {
- 258:	cf 93       	push	r28
- 25a:	c8 2f       	mov	r28, r24
-	
-	//PORTC.OUTSET = PIN4_bm;
-	//sendData(0x18,1);
-	//sendData(0x10, 0);
-	
-	PORTC.OUTCLR = PIN5_bm;
- 25c:	e0 e4       	ldi	r30, 0x40	; 64
- 25e:	f6 e0       	ldi	r31, 0x06	; 6
- 260:	80 e2       	ldi	r24, 0x20	; 32
- 262:	86 83       	std	Z+6, r24	; 0x06
-	PORTC.OUTCLR = PIN4_bm;
- 264:	80 e1       	ldi	r24, 0x10	; 16
- 266:	86 83       	std	Z+6, r24	; 0x06
-	sendData(0x18,1);
- 268:	61 e0       	ldi	r22, 0x01	; 1
- 26a:	88 e1       	ldi	r24, 0x18	; 24
- 26c:	0e 94 30 02 	call	0x460	; 0x460 <sendData>
-	
+ 260:	cf 93       	push	r28
+ 262:	c8 2f       	mov	r28, r24
+	unsigned char i;//, tube;
+
+	for(i = 0; i < MAPNUM; i++)
+ 264:	80 e0       	ldi	r24, 0x00	; 0
+ 266:	08 c0       	rjmp	.+16     	; 0x278 <characterTube+0x18>
+	{
+		if(byte == reMapBCDTube[i])
+ 268:	e8 2f       	mov	r30, r24
+ 26a:	f0 e0       	ldi	r31, 0x00	; 0
+ 26c:	e0 50       	subi	r30, 0x00	; 0
+ 26e:	f0 4e       	sbci	r31, 0xE0	; 224
+ 270:	90 81       	ld	r25, Z
+ 272:	c9 17       	cp	r28, r25
+ 274:	21 f0       	breq	.+8      	; 0x27e <characterTube+0x1e>
+
+void characterTube(unsigned char byte)
+{
+	unsigned char i;//, tube;
+
+	for(i = 0; i < MAPNUM; i++)
+ 276:	8f 5f       	subi	r24, 0xFF	; 255
+ 278:	8a 30       	cpi	r24, 0x0A	; 10
+ 27a:	b0 f3       	brcs	.-20     	; 0x268 <characterTube+0x8>
+ 27c:	01 c0       	rjmp	.+2      	; 0x280 <characterTube+0x20>
+	{
+		if(byte == reMapBCDTube[i])
+		{
+			byte = i;
+ 27e:	c8 2f       	mov	r28, r24
+			break;
+		}
+	}
 	
 	if(byte & 0x02)
- 270:	c1 ff       	sbrs	r28, 1
- 272:	03 c0       	rjmp	.+6      	; 0x27a <characterTube+0x22>
+ 280:	c1 ff       	sbrs	r28, 1
+ 282:	04 c0       	rjmp	.+8      	; 0x28c <characterTube+0x2c>
 		PORTC.OUTSET = PIN5_bm;
- 274:	80 e2       	ldi	r24, 0x20	; 32
- 276:	80 93 45 06 	sts	0x0645, r24	; 0x800645 <__TEXT_REGION_LENGTH__+0x700645>
-		
-		
+ 284:	80 e2       	ldi	r24, 0x20	; 32
+ 286:	80 93 45 06 	sts	0x0645, r24	; 0x800645 <__TEXT_REGION_LENGTH__+0x700645>
+ 28a:	03 c0       	rjmp	.+6      	; 0x292 <characterTube+0x32>
+	else
+		PORTC.OUTCLR = PIN5_bm;
+ 28c:	80 e2       	ldi	r24, 0x20	; 32
+ 28e:	80 93 46 06 	sts	0x0646, r24	; 0x800646 <__TEXT_REGION_LENGTH__+0x700646>
+	
+	sendData(0x18,1);
+ 292:	61 e0       	ldi	r22, 0x01	; 1
+ 294:	88 e1       	ldi	r24, 0x18	; 24
+ 296:	0e 94 db 03 	call	0x7b6	; 0x7b6 <sendData>
+	
 	if((byte & 0x04) || (byte & 0x08))
- 27a:	c2 fd       	sbrc	r28, 2
- 27c:	02 c0       	rjmp	.+4      	; 0x282 <characterTube+0x2a>
- 27e:	c3 ff       	sbrs	r28, 3
- 280:	06 c0       	rjmp	.+12     	; 0x28e <characterTube+0x36>
+ 29a:	c2 fd       	sbrc	r28, 2
+ 29c:	02 c0       	rjmp	.+4      	; 0x2a2 <characterTube+0x42>
+ 29e:	c3 ff       	sbrs	r28, 3
+ 2a0:	06 c0       	rjmp	.+12     	; 0x2ae <characterTube+0x4e>
 	{
 		//send to 2 for 0x08, send to pin 4 for 0x04
 			sendData((byte & 0x0C) << 1, 0);
- 282:	60 e0       	ldi	r22, 0x00	; 0
- 284:	8c 2f       	mov	r24, r28
- 286:	8c 70       	andi	r24, 0x0C	; 12
- 288:	88 0f       	add	r24, r24
- 28a:	0e 94 30 02 	call	0x460	; 0x460 <sendData>
+ 2a2:	60 e0       	ldi	r22, 0x00	; 0
+ 2a4:	8c 2f       	mov	r24, r28
+ 2a6:	8c 70       	andi	r24, 0x0C	; 12
+ 2a8:	88 0f       	add	r24, r24
+ 2aa:	0e 94 db 03 	call	0x7b6	; 0x7b6 <sendData>
 	}
-	
 		
 	if(byte & 0x01)	//pin 3
- 28e:	c0 ff       	sbrs	r28, 0
- 290:	03 c0       	rjmp	.+6      	; 0x298 <characterTube+0x40>
+ 2ae:	c0 ff       	sbrs	r28, 0
+ 2b0:	04 c0       	rjmp	.+8      	; 0x2ba <characterTube+0x5a>
 		PORTC.OUTSET = PIN4_bm;
- 292:	80 e1       	ldi	r24, 0x10	; 16
- 294:	80 93 45 06 	sts	0x0645, r24	; 0x800645 <__TEXT_REGION_LENGTH__+0x700645>
-		
-	//PORTC.OUTSET = PIN4_bm; = k
-	//PORTC.OUTSET = PIN5_bm; = blank
-	
-	//sendData(1 << 3, 0);
+ 2b2:	80 e1       	ldi	r24, 0x10	; 16
+ 2b4:	80 93 45 06 	sts	0x0645, r24	; 0x800645 <__TEXT_REGION_LENGTH__+0x700645>
+ 2b8:	03 c0       	rjmp	.+6      	; 0x2c0 <characterTube+0x60>
+	else
+		PORTC.OUTCLR = PIN4_bm;
+ 2ba:	80 e1       	ldi	r24, 0x10	; 16
+ 2bc:	80 93 46 06 	sts	0x0646, r24	; 0x800646 <__TEXT_REGION_LENGTH__+0x700646>
 }
- 298:	cf 91       	pop	r28
- 29a:	08 95       	ret
+ 2c0:	cf 91       	pop	r28
+ 2c2:	08 95       	ret
 
-0000029c <rtc_init>:
+000002c4 <initDisplay>:
+	
+volatile unsigned char hour, minute;
+
+void initDisplay()
+{
+	PORTC_DIR = FIRSTTUBE | SIXTHTUBEC | CHARTUBEIO;
+ 2c4:	8f ef       	ldi	r24, 0xFF	; 255
+ 2c6:	80 93 40 06 	sts	0x0640, r24	; 0x800640 <__TEXT_REGION_LENGTH__+0x700640>
+	PORTD_DIR = SIXTHTUBED | FIFTHTUBEIO;
+ 2ca:	97 e0       	ldi	r25, 0x07	; 7
+ 2cc:	90 93 60 06 	sts	0x0660, r25	; 0x800660 <__TEXT_REGION_LENGTH__+0x700660>
+	PORTA_DIR = FOURTHTUBE | THIRDTUBE;
+ 2d0:	80 93 00 06 	sts	0x0600, r24	; 0x800600 <__TEXT_REGION_LENGTH__+0x700600>
+	PORTB_DIR = SECONDTUBE;
+ 2d4:	8f e0       	ldi	r24, 0x0F	; 15
+ 2d6:	80 93 20 06 	sts	0x0620, r24	; 0x800620 <__TEXT_REGION_LENGTH__+0x700620>
+	
+	PORTD_DIRSET = PIN4_bm;	// dot point
+ 2da:	80 e1       	ldi	r24, 0x10	; 16
+ 2dc:	80 93 61 06 	sts	0x0661, r24	; 0x800661 <__TEXT_REGION_LENGTH__+0x700661>
+	
+	characterTube(2);
+ 2e0:	82 e0       	ldi	r24, 0x02	; 2
+ 2e2:	0e 94 30 01 	call	0x260	; 0x260 <characterTube>
+ 2e6:	08 95       	ret
+
+000002e8 <clearDisplay>:
+}
+// SEE IF FIFTHTUBE IS STILL BUGGED (FLASHING 1)
+//set displays to display nothing
+void clearDisplay()
+{
+	PORTC.OUT = TUBEOFF | (unsigned char)(TUBEOFF << 6);	//tube 1 and 6
+ 2e8:	8f ec       	ldi	r24, 0xCF	; 207
+ 2ea:	80 93 44 06 	sts	0x0644, r24	; 0x800644 <__TEXT_REGION_LENGTH__+0x700644>
+	
+	PORTD.OUT &= PORTDPRESERVE;	//0xFC preserve all bits but first 2
+ 2ee:	e0 e6       	ldi	r30, 0x60	; 96
+ 2f0:	f6 e0       	ldi	r31, 0x06	; 6
+ 2f2:	84 81       	ldd	r24, Z+4	; 0x04
+ 2f4:	8c 7f       	andi	r24, 0xFC	; 252
+ 2f6:	84 83       	std	Z+4, r24	; 0x04
+	PORTD.OUT |= TUBEOFF >> 2;	//part of tube 6 KILLS TUBE 6
+ 2f8:	84 81       	ldd	r24, Z+4	; 0x04
+ 2fa:	83 60       	ori	r24, 0x03	; 3
+ 2fc:	84 83       	std	Z+4, r24	; 0x04
+	
+	PORTB.OUT = TUBEOFF;	// tube 2	+1
+ 2fe:	8f e0       	ldi	r24, 0x0F	; 15
+ 300:	80 93 24 06 	sts	0x0624, r24	; 0x800624 <__TEXT_REGION_LENGTH__+0x700624>
+	
+	PORTA.OUT = (TUBEOFF << 4) | TUBEOFF; // tube 3 and 4
+ 304:	8f ef       	ldi	r24, 0xFF	; 255
+ 306:	80 93 04 06 	sts	0x0604, r24	; 0x800604 <__TEXT_REGION_LENGTH__+0x700604>
+	
+	fifthTube(TUBEOFF);	//tube 5
+ 30a:	8f e0       	ldi	r24, 0x0F	; 15
+ 30c:	0e 94 1d 01 	call	0x23a	; 0x23a <fifthTube>
+	
+	//character tube
+	characterTube(TUBEOFF);
+ 310:	8f e0       	ldi	r24, 0x0F	; 15
+ 312:	0e 94 30 01 	call	0x260	; 0x260 <characterTube>
+ 316:	08 95       	ret
+
+00000318 <display>:
+	in format of "HHMMSS" Little-endian format
+	
+	unclean format to prevent flashing of cathode
+*/
+void display(unsigned char *number)
+{
+ 318:	cf 93       	push	r28
+ 31a:	df 93       	push	r29
+ 31c:	ec 01       	movw	r28, r24
+	static unsigned char last_num;
+	//unsigned char test = PORTD.OUT & 0xFC;
+	
+	PORTC.OUT = reMapBCD[*(number + 0)] | (reMapBCD[*(number + 5)] << 6);	//tube 1 and 6
+ 31e:	e8 81       	ld	r30, Y
+ 320:	f0 e0       	ldi	r31, 0x00	; 0
+ 322:	e6 5f       	subi	r30, 0xF6	; 246
+ 324:	ff 4d       	sbci	r31, 0xDF	; 223
+ 326:	20 81       	ld	r18, Z
+ 328:	ed 81       	ldd	r30, Y+5	; 0x05
+ 32a:	f0 e0       	ldi	r31, 0x00	; 0
+ 32c:	e6 5f       	subi	r30, 0xF6	; 246
+ 32e:	ff 4d       	sbci	r31, 0xDF	; 223
+ 330:	90 81       	ld	r25, Z
+ 332:	30 e4       	ldi	r19, 0x40	; 64
+ 334:	93 9f       	mul	r25, r19
+ 336:	c0 01       	movw	r24, r0
+ 338:	11 24       	eor	r1, r1
+ 33a:	82 2b       	or	r24, r18
+ 33c:	80 93 44 06 	sts	0x0644, r24	; 0x800644 <__TEXT_REGION_LENGTH__+0x700644>
+	
+	PORTD.OUT &= PORTDPRESERVE;	//0xFC preserve all bits but first 2
+ 340:	a0 e6       	ldi	r26, 0x60	; 96
+ 342:	b6 e0       	ldi	r27, 0x06	; 6
+ 344:	14 96       	adiw	r26, 0x04	; 4
+ 346:	8c 91       	ld	r24, X
+ 348:	14 97       	sbiw	r26, 0x04	; 4
+ 34a:	8c 7f       	andi	r24, 0xFC	; 252
+ 34c:	14 96       	adiw	r26, 0x04	; 4
+ 34e:	8c 93       	st	X, r24
+ 350:	14 97       	sbiw	r26, 0x04	; 4
+	PORTD.OUT |= (reMapBCD[*(number + 5)] >> 2);	//part of tube 6 KILLS TUBE 6
+ 352:	14 96       	adiw	r26, 0x04	; 4
+ 354:	9c 91       	ld	r25, X
+ 356:	14 97       	sbiw	r26, 0x04	; 4
+ 358:	ed 81       	ldd	r30, Y+5	; 0x05
+ 35a:	f0 e0       	ldi	r31, 0x00	; 0
+ 35c:	e6 5f       	subi	r30, 0xF6	; 246
+ 35e:	ff 4d       	sbci	r31, 0xDF	; 223
+ 360:	80 81       	ld	r24, Z
+ 362:	86 95       	lsr	r24
+ 364:	86 95       	lsr	r24
+ 366:	89 2b       	or	r24, r25
+ 368:	14 96       	adiw	r26, 0x04	; 4
+ 36a:	8c 93       	st	X, r24
+	
+	PORTB.OUT = reMapBCD[*(number + 1)];	// tube 2	+1
+ 36c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 36e:	f0 e0       	ldi	r31, 0x00	; 0
+ 370:	e6 5f       	subi	r30, 0xF6	; 246
+ 372:	ff 4d       	sbci	r31, 0xDF	; 223
+ 374:	80 81       	ld	r24, Z
+ 376:	80 93 24 06 	sts	0x0624, r24	; 0x800624 <__TEXT_REGION_LENGTH__+0x700624>
+	
+	PORTA.OUT = (reMapBCD[*(number + 2)]) << 4 | reMapBCD[*(number + 3)]; // tube 3 and 4
+ 37a:	ea 81       	ldd	r30, Y+2	; 0x02
+ 37c:	f0 e0       	ldi	r31, 0x00	; 0
+ 37e:	e6 5f       	subi	r30, 0xF6	; 246
+ 380:	ff 4d       	sbci	r31, 0xDF	; 223
+ 382:	80 81       	ld	r24, Z
+ 384:	20 e1       	ldi	r18, 0x10	; 16
+ 386:	82 9f       	mul	r24, r18
+ 388:	c0 01       	movw	r24, r0
+ 38a:	11 24       	eor	r1, r1
+ 38c:	eb 81       	ldd	r30, Y+3	; 0x03
+ 38e:	f0 e0       	ldi	r31, 0x00	; 0
+ 390:	e6 5f       	subi	r30, 0xF6	; 246
+ 392:	ff 4d       	sbci	r31, 0xDF	; 223
+ 394:	90 81       	ld	r25, Z
+ 396:	89 2b       	or	r24, r25
+ 398:	80 93 04 06 	sts	0x0604, r24	; 0x800604 <__TEXT_REGION_LENGTH__+0x700604>
+	
+	//prevent flashing of 5th element '1'
+	
+	if(*(number + 4) != last_num)
+ 39c:	ec 81       	ldd	r30, Y+4	; 0x04
+ 39e:	80 91 14 20 	lds	r24, 0x2014	; 0x802014 <__data_end>
+ 3a2:	e8 17       	cp	r30, r24
+ 3a4:	31 f0       	breq	.+12     	; 0x3b2 <display+0x9a>
+		fifthTube(reMapBCD[*(number + 4)]);	//tube 5
+ 3a6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3a8:	e6 5f       	subi	r30, 0xF6	; 246
+ 3aa:	ff 4d       	sbci	r31, 0xDF	; 223
+ 3ac:	80 81       	ld	r24, Z
+ 3ae:	0e 94 1d 01 	call	0x23a	; 0x23a <fifthTube>
+		
+	last_num = *(number + 4);
+ 3b2:	8c 81       	ldd	r24, Y+4	; 0x04
+ 3b4:	80 93 14 20 	sts	0x2014, r24	; 0x802014 <__data_end>
+}
+ 3b8:	df 91       	pop	r29
+ 3ba:	cf 91       	pop	r28
+ 3bc:	08 95       	ret
+
+000003be <cathodeRefresh>:
+/* Function:	cathodeRefresh
+
+	Flashes all digits of the nixie tube to prevent cathode poisoning.
+*/
+void cathodeRefresh()
+{
+ 3be:	1f 93       	push	r17
+ 3c0:	cf 93       	push	r28
+ 3c2:	df 93       	push	r29
+ 3c4:	cd b7       	in	r28, 0x3d	; 61
+ 3c6:	de b7       	in	r29, 0x3e	; 62
+ 3c8:	26 97       	sbiw	r28, 0x06	; 6
+ 3ca:	cd bf       	out	0x3d, r28	; 61
+ 3cc:	de bf       	out	0x3e, r29	; 62
+	unsigned char val[6] = {0};
+ 3ce:	fe 01       	movw	r30, r28
+ 3d0:	31 96       	adiw	r30, 0x01	; 1
+ 3d2:	86 e0       	ldi	r24, 0x06	; 6
+ 3d4:	df 01       	movw	r26, r30
+ 3d6:	1d 92       	st	X+, r1
+ 3d8:	8a 95       	dec	r24
+ 3da:	e9 f7       	brne	.-6      	; 0x3d6 <cathodeRefresh+0x18>
+	unsigned char i, j;
+	
+	//flash numbers 0-9 on each digit
+	for(i = 0; i < 10; i++)
+ 3dc:	10 e0       	ldi	r17, 0x00	; 0
+ 3de:	21 c0       	rjmp	.+66     	; 0x422 <__LOCK_REGION_LENGTH__+0x22>
+	{
+		for(j = 0; j < 6; j++)
+		{
+			val[j] = i;
+ 3e0:	e1 e0       	ldi	r30, 0x01	; 1
+ 3e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 3e4:	ec 0f       	add	r30, r28
+ 3e6:	fd 1f       	adc	r31, r29
+ 3e8:	e8 0f       	add	r30, r24
+ 3ea:	f1 1d       	adc	r31, r1
+ 3ec:	10 83       	st	Z, r17
+	unsigned char i, j;
+	
+	//flash numbers 0-9 on each digit
+	for(i = 0; i < 10; i++)
+	{
+		for(j = 0; j < 6; j++)
+ 3ee:	8f 5f       	subi	r24, 0xFF	; 255
+ 3f0:	01 c0       	rjmp	.+2      	; 0x3f4 <cathodeRefresh+0x36>
+ 3f2:	80 e0       	ldi	r24, 0x00	; 0
+ 3f4:	86 30       	cpi	r24, 0x06	; 6
+ 3f6:	a0 f3       	brcs	.-24     	; 0x3e0 <cathodeRefresh+0x22>
+		{
+			val[j] = i;
+		}
+		display(val);
+ 3f8:	ce 01       	movw	r24, r28
+ 3fa:	01 96       	adiw	r24, 0x01	; 1
+ 3fc:	0e 94 8c 01 	call	0x318	; 0x318 <display>
+		characterTube(reMapBCDTube[i]);
+ 400:	e1 2f       	mov	r30, r17
+ 402:	f0 e0       	ldi	r31, 0x00	; 0
+ 404:	e0 50       	subi	r30, 0x00	; 0
+ 406:	f0 4e       	sbci	r31, 0xE0	; 224
+ 408:	80 81       	ld	r24, Z
+ 40a:	0e 94 30 01 	call	0x260	; 0x260 <characterTube>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 40e:	bf e7       	ldi	r27, 0x7F	; 127
+ 410:	28 e3       	ldi	r18, 0x38	; 56
+ 412:	31 e0       	ldi	r19, 0x01	; 1
+ 414:	b1 50       	subi	r27, 0x01	; 1
+ 416:	20 40       	sbci	r18, 0x00	; 0
+ 418:	30 40       	sbci	r19, 0x00	; 0
+ 41a:	e1 f7       	brne	.-8      	; 0x414 <__LOCK_REGION_LENGTH__+0x14>
+ 41c:	00 c0       	rjmp	.+0      	; 0x41e <__LOCK_REGION_LENGTH__+0x1e>
+ 41e:	00 00       	nop
+{
+	unsigned char val[6] = {0};
+	unsigned char i, j;
+	
+	//flash numbers 0-9 on each digit
+	for(i = 0; i < 10; i++)
+ 420:	1f 5f       	subi	r17, 0xFF	; 255
+ 422:	1a 30       	cpi	r17, 0x0A	; 10
+ 424:	30 f3       	brcs	.-52     	; 0x3f2 <cathodeRefresh+0x34>
+		characterTube(reMapBCDTube[i]);
+		_delay_ms(400);
+	}
+	
+	//turn off all digits
+	clearDisplay();
+ 426:	0e 94 74 01 	call	0x2e8	; 0x2e8 <clearDisplay>
+	
+	// dot point in each tube
+	DOTPOINTHIGH;
+ 42a:	e0 e6       	ldi	r30, 0x60	; 96
+ 42c:	f6 e0       	ldi	r31, 0x06	; 6
+ 42e:	80 e1       	ldi	r24, 0x10	; 16
+ 430:	85 83       	std	Z+5, r24	; 0x05
+ 432:	9f e7       	ldi	r25, 0x7F	; 127
+ 434:	a8 e3       	ldi	r26, 0x38	; 56
+ 436:	b1 e0       	ldi	r27, 0x01	; 1
+ 438:	91 50       	subi	r25, 0x01	; 1
+ 43a:	a0 40       	sbci	r26, 0x00	; 0
+ 43c:	b0 40       	sbci	r27, 0x00	; 0
+ 43e:	e1 f7       	brne	.-8      	; 0x438 <__LOCK_REGION_LENGTH__+0x38>
+ 440:	00 c0       	rjmp	.+0      	; 0x442 <__LOCK_REGION_LENGTH__+0x42>
+ 442:	00 00       	nop
+	_delay_ms(400);
+	DOTPOINTLOW;
+ 444:	86 83       	std	Z+6, r24	; 0x06
+}
+ 446:	26 96       	adiw	r28, 0x06	; 6
+ 448:	cd bf       	out	0x3d, r28	; 61
+ 44a:	de bf       	out	0x3e, r29	; 62
+ 44c:	df 91       	pop	r29
+ 44e:	cf 91       	pop	r28
+ 450:	1f 91       	pop	r17
+ 452:	08 95       	ret
+
+00000454 <checkRefesh>:
+	characterTube(2);
+}
+
+//check hours and if minute has passed once
+void checkRefesh(unsigned char *time)
+{
+ 454:	cf 93       	push	r28
+ 456:	df 93       	push	r29
+ 458:	ec 01       	movw	r28, r24
+	static unsigned char last_min, last_hour;
+	
+	if(*(time + RTCHOUR) != last_hour)
+ 45a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 45c:	80 91 16 20 	lds	r24, 0x2016	; 0x802016 <last_hour.3969>
+ 460:	98 17       	cp	r25, r24
+ 462:	71 f0       	breq	.+28     	; 0x480 <checkRefesh+0x2c>
+	{
+		last_min = *(time + RTCMINUTE);
+ 464:	89 81       	ldd	r24, Y+1	; 0x01
+ 466:	80 93 15 20 	sts	0x2015, r24	; 0x802015 <last_min.3968>
+		
+		while (*(rtc_get_time() + RTCMINUTE) == last_min)
+ 46a:	02 c0       	rjmp	.+4      	; 0x470 <checkRefesh+0x1c>
+		{
+			cathodeRefresh();
+ 46c:	0e 94 df 01 	call	0x3be	; 0x3be <cathodeRefresh>
+	
+	if(*(time + RTCHOUR) != last_hour)
+	{
+		last_min = *(time + RTCMINUTE);
+		
+		while (*(rtc_get_time() + RTCMINUTE) == last_min)
+ 470:	0e 94 a8 02 	call	0x550	; 0x550 <rtc_get_time>
+ 474:	fc 01       	movw	r30, r24
+ 476:	91 81       	ldd	r25, Z+1	; 0x01
+ 478:	80 91 15 20 	lds	r24, 0x2015	; 0x802015 <last_min.3968>
+ 47c:	98 17       	cp	r25, r24
+ 47e:	b1 f3       	breq	.-20     	; 0x46c <checkRefesh+0x18>
+		{
+			cathodeRefresh();
+		}
+	}
+	
+	last_hour = *(time + RTCHOUR);
+ 480:	8a 81       	ldd	r24, Y+2	; 0x02
+ 482:	80 93 16 20 	sts	0x2016, r24	; 0x802016 <last_hour.3969>
+}
+ 486:	df 91       	pop	r29
+ 488:	cf 91       	pop	r28
+ 48a:	08 95       	ret
+
+0000048c <convertTime>:
+		
+	last_num = *(number + 4);
+}
+
+void convertTime(unsigned char *number)
+{
+ 48c:	cf 93       	push	r28
+ 48e:	df 93       	push	r29
+ 490:	cd b7       	in	r28, 0x3d	; 61
+ 492:	de b7       	in	r29, 0x3e	; 62
+ 494:	26 97       	sbiw	r28, 0x06	; 6
+ 496:	cd bf       	out	0x3d, r28	; 61
+ 498:	de bf       	out	0x3e, r29	; 62
+ 49a:	dc 01       	movw	r26, r24
+	unsigned char convert[6] = {0};
+ 49c:	ae 01       	movw	r20, r28
+ 49e:	4f 5f       	subi	r20, 0xFF	; 255
+ 4a0:	5f 4f       	sbci	r21, 0xFF	; 255
+ 4a2:	86 e0       	ldi	r24, 0x06	; 6
+ 4a4:	fa 01       	movw	r30, r20
+ 4a6:	11 92       	st	Z+, r1
+ 4a8:	8a 95       	dec	r24
+ 4aa:	e9 f7       	brne	.-6      	; 0x4a6 <convertTime+0x1a>
+
+	convert[4] = *(number) / 10;		//Ss
+ 4ac:	3c 91       	ld	r19, X
+ 4ae:	9d ec       	ldi	r25, 0xCD	; 205
+ 4b0:	39 9f       	mul	r19, r25
+ 4b2:	21 2d       	mov	r18, r1
+ 4b4:	11 24       	eor	r1, r1
+ 4b6:	26 95       	lsr	r18
+ 4b8:	26 95       	lsr	r18
+ 4ba:	26 95       	lsr	r18
+ 4bc:	2d 83       	std	Y+5, r18	; 0x05
+	convert[5] = *(number) % 10;		//sS
+ 4be:	22 0f       	add	r18, r18
+ 4c0:	82 2f       	mov	r24, r18
+ 4c2:	88 0f       	add	r24, r24
+ 4c4:	88 0f       	add	r24, r24
+ 4c6:	28 0f       	add	r18, r24
+ 4c8:	32 1b       	sub	r19, r18
+ 4ca:	3e 83       	std	Y+6, r19	; 0x06
+	
+	convert[2] = *(number + 1) / 10;	//Mm
+ 4cc:	11 96       	adiw	r26, 0x01	; 1
+ 4ce:	3c 91       	ld	r19, X
+ 4d0:	11 97       	sbiw	r26, 0x01	; 1
+ 4d2:	39 9f       	mul	r19, r25
+ 4d4:	21 2d       	mov	r18, r1
+ 4d6:	11 24       	eor	r1, r1
+ 4d8:	26 95       	lsr	r18
+ 4da:	26 95       	lsr	r18
+ 4dc:	26 95       	lsr	r18
+ 4de:	2b 83       	std	Y+3, r18	; 0x03
+	convert[3] = *(number + 1) % 10;	//mM
+ 4e0:	22 0f       	add	r18, r18
+ 4e2:	82 2f       	mov	r24, r18
+ 4e4:	88 0f       	add	r24, r24
+ 4e6:	88 0f       	add	r24, r24
+ 4e8:	28 0f       	add	r18, r24
+ 4ea:	83 2f       	mov	r24, r19
+ 4ec:	82 1b       	sub	r24, r18
+ 4ee:	8c 83       	std	Y+4, r24	; 0x04
+	
+	convert[0] = *(number + 2) / 10;	//Hh
+ 4f0:	12 96       	adiw	r26, 0x02	; 2
+ 4f2:	2c 91       	ld	r18, X
+ 4f4:	29 9f       	mul	r18, r25
+ 4f6:	91 2d       	mov	r25, r1
+ 4f8:	11 24       	eor	r1, r1
+ 4fa:	96 95       	lsr	r25
+ 4fc:	96 95       	lsr	r25
+ 4fe:	96 95       	lsr	r25
+ 500:	99 83       	std	Y+1, r25	; 0x01
+	convert[1] = *(number + 2) % 10;	//hH
+ 502:	99 0f       	add	r25, r25
+ 504:	89 2f       	mov	r24, r25
+ 506:	88 0f       	add	r24, r24
+ 508:	88 0f       	add	r24, r24
+ 50a:	98 0f       	add	r25, r24
+ 50c:	82 2f       	mov	r24, r18
+ 50e:	89 1b       	sub	r24, r25
+ 510:	8a 83       	std	Y+2, r24	; 0x02
+	
+	//for cathodeRefresh/checkrefresh	BAD CODE
+	minute = *(number + 1);
+ 512:	30 93 20 20 	sts	0x2020, r19	; 0x802020 <minute>
+	hour = *(number + 2);
+ 516:	20 93 21 20 	sts	0x2021, r18	; 0x802021 <hour>
+	
+	display(convert);
+ 51a:	ca 01       	movw	r24, r20
+ 51c:	0e 94 8c 01 	call	0x318	; 0x318 <display>
+ 520:	26 96       	adiw	r28, 0x06	; 6
+ 522:	cd bf       	out	0x3d, r28	; 61
+ 524:	de bf       	out	0x3e, r29	; 62
+ 526:	df 91       	pop	r29
+ 528:	cf 91       	pop	r28
+ 52a:	08 95       	ret
+
+0000052c <rtc_init>:
+#include "ds3231.h"
+#include "i2c.h"
+
+void rtc_init()
+{
+	PORTD.DIRCLR = PULSE;	//set to input
+ 52c:	e0 e6       	ldi	r30, 0x60	; 96
+ 52e:	f6 e0       	ldi	r31, 0x06	; 6
+ 530:	80 e2       	ldi	r24, 0x20	; 32
+ 532:	82 83       	std	Z+2, r24	; 0x02
+	PORTD.PIN5CTRL = PORT_OPC_PULLUP_gc;
+ 534:	88 e1       	ldi	r24, 0x18	; 24
+ 536:	85 8b       	std	Z+21, r24	; 0x15
+ 538:	08 95       	ret
+
+0000053a <bcdToDec>:
+	return ((convert / 10 * 16) + (convert % 10));
+}
+*/
+unsigned char bcdToDec(unsigned char convert)
+{
+	return ((convert / 16 * 10) + (convert % 16));
+ 53a:	98 2f       	mov	r25, r24
+ 53c:	92 95       	swap	r25
+ 53e:	9f 70       	andi	r25, 0x0F	; 15
+ 540:	99 0f       	add	r25, r25
+ 542:	29 2f       	mov	r18, r25
+ 544:	22 0f       	add	r18, r18
+ 546:	22 0f       	add	r18, r18
+ 548:	92 0f       	add	r25, r18
+ 54a:	8f 70       	andi	r24, 0x0F	; 15
+}
+ 54c:	89 0f       	add	r24, r25
+ 54e:	08 95       	ret
+
+00000550 <rtc_get_time>:
+
+unsigned char* rtc_get_time()
+{
+ 550:	0f 93       	push	r16
+ 552:	1f 93       	push	r17
+ 554:	cf 93       	push	r28
+ 556:	df 93       	push	r29
+	static unsigned char time[8];
+	char i;
+	
+	i2c_start();
+ 558:	0e 94 01 03 	call	0x602	; 0x602 <i2c_start>
+	(void) i2c_device_id(ds3231,0);	//send address + write bit
+ 55c:	60 e0       	ldi	r22, 0x00	; 0
+ 55e:	88 e6       	ldi	r24, 0x68	; 104
+ 560:	0e 94 17 03 	call	0x62e	; 0x62e <i2c_device_id>
+	
+	i2c_write(0);	//point to location i of DS3231
+ 564:	80 e0       	ldi	r24, 0x00	; 0
+ 566:	0e 94 92 03 	call	0x724	; 0x724 <i2c_write>
+	
+	i2c_start();
+ 56a:	0e 94 01 03 	call	0x602	; 0x602 <i2c_start>
+	
+	(void) i2c_device_id(ds3231, 1);	//send address + read bit
+ 56e:	61 e0       	ldi	r22, 0x01	; 1
+ 570:	88 e6       	ldi	r24, 0x68	; 104
+ 572:	0e 94 17 03 	call	0x62e	; 0x62e <i2c_device_id>
+	
+	for(i = 0; i < 7; i++)
+ 576:	c0 e0       	ldi	r28, 0x00	; 0
+ 578:	0c c0       	rjmp	.+24     	; 0x592 <rtc_get_time+0x42>
+	{
+			time[i] = bcdToDec(i2c_read(0));
+ 57a:	0c 2f       	mov	r16, r28
+ 57c:	10 e0       	ldi	r17, 0x00	; 0
+ 57e:	80 e0       	ldi	r24, 0x00	; 0
+ 580:	0e 94 66 03 	call	0x6cc	; 0x6cc <i2c_read>
+ 584:	0e 94 9d 02 	call	0x53a	; 0x53a <bcdToDec>
+ 588:	f8 01       	movw	r30, r16
+ 58a:	e9 5e       	subi	r30, 0xE9	; 233
+ 58c:	ff 4d       	sbci	r31, 0xDF	; 223
+ 58e:	80 83       	st	Z, r24
+	
+	i2c_start();
+	
+	(void) i2c_device_id(ds3231, 1);	//send address + read bit
+	
+	for(i = 0; i < 7; i++)
+ 590:	cf 5f       	subi	r28, 0xFF	; 255
+ 592:	c7 30       	cpi	r28, 0x07	; 7
+ 594:	90 f3       	brcs	.-28     	; 0x57a <rtc_get_time+0x2a>
+	{
+			time[i] = bcdToDec(i2c_read(0));
 	}
 	time[i] = bcdToDec(i2c_read(1));	//set to not ack when 6th loop
+ 596:	d0 e0       	ldi	r29, 0x00	; 0
+ 598:	81 e0       	ldi	r24, 0x01	; 1
+ 59a:	0e 94 66 03 	call	0x6cc	; 0x6cc <i2c_read>
+ 59e:	0e 94 9d 02 	call	0x53a	; 0x53a <bcdToDec>
+ 5a2:	c9 5e       	subi	r28, 0xE9	; 233
+ 5a4:	df 4d       	sbci	r29, 0xDF	; 223
+ 5a6:	88 83       	st	Y, r24
 	
 	i2c_stop();
+ 5a8:	0e 94 0c 03 	call	0x618	; 0x618 <i2c_stop>
 	return time;
 }
- 29c:	e0 e6       	ldi	r30, 0x60	; 96
- 29e:	f6 e0       	ldi	r31, 0x06	; 6
- 2a0:	80 e2       	ldi	r24, 0x20	; 32
- 2a2:	82 83       	std	Z+2, r24	; 0x02
- 2a4:	88 e1       	ldi	r24, 0x18	; 24
- 2a6:	85 8b       	std	Z+21, r24	; 0x15
- 2a8:	08 95       	ret
+ 5ac:	87 e1       	ldi	r24, 0x17	; 23
+ 5ae:	90 e2       	ldi	r25, 0x20	; 32
+ 5b0:	df 91       	pop	r29
+ 5b2:	cf 91       	pop	r28
+ 5b4:	1f 91       	pop	r17
+ 5b6:	0f 91       	pop	r16
+ 5b8:	08 95       	ret
 
-000002aa <rtc_ctrl>:
+000005ba <rtc_ctrl>:
 
 void rtc_ctrl(unsigned char mask)
 {	
- 2aa:	cf 93       	push	r28
- 2ac:	c8 2f       	mov	r28, r24
+ 5ba:	cf 93       	push	r28
+ 5bc:	c8 2f       	mov	r28, r24
 	i2c_start();
- 2ae:	0e 94 79 01 	call	0x2f2	; 0x2f2 <i2c_start>
+ 5be:	0e 94 01 03 	call	0x602	; 0x602 <i2c_start>
 	
 	i2c_device_id(ds3231, 0);
- 2b2:	60 e0       	ldi	r22, 0x00	; 0
- 2b4:	88 e6       	ldi	r24, 0x68	; 104
- 2b6:	0e 94 8f 01 	call	0x31e	; 0x31e <i2c_device_id>
+ 5c2:	60 e0       	ldi	r22, 0x00	; 0
+ 5c4:	88 e6       	ldi	r24, 0x68	; 104
+ 5c6:	0e 94 17 03 	call	0x62e	; 0x62e <i2c_device_id>
 	
 	i2c_write(CONTROL);
- 2ba:	8e e0       	ldi	r24, 0x0E	; 14
- 2bc:	0e 94 de 01 	call	0x3bc	; 0x3bc <i2c_write>
+ 5ca:	8e e0       	ldi	r24, 0x0E	; 14
+ 5cc:	0e 94 92 03 	call	0x724	; 0x724 <i2c_write>
 	
 	//i2c_start();
 	//i2c_device_id(ds3231, 1);
 	i2c_write(mask);
- 2c0:	8c 2f       	mov	r24, r28
- 2c2:	0e 94 de 01 	call	0x3bc	; 0x3bc <i2c_write>
+ 5d0:	8c 2f       	mov	r24, r28
+ 5d2:	0e 94 92 03 	call	0x724	; 0x724 <i2c_write>
 	
 	i2c_stop();
- 2c6:	0e 94 84 01 	call	0x308	; 0x308 <i2c_stop>
+ 5d6:	0e 94 0c 03 	call	0x618	; 0x618 <i2c_stop>
 }
- 2ca:	cf 91       	pop	r28
- 2cc:	08 95       	ret
+ 5da:	cf 91       	pop	r28
+ 5dc:	08 95       	ret
 
-000002ce <init_i2c>:
+000005de <init_i2c>:
+
+#include "i2c.h"
+
+void init_i2c()
+{
+	PORTE_DIRSET = PIN0_bm;	//SDA output
+ 5de:	e1 e8       	ldi	r30, 0x81	; 129
+ 5e0:	f6 e0       	ldi	r31, 0x06	; 6
+ 5e2:	91 e0       	ldi	r25, 0x01	; 1
+ 5e4:	90 83       	st	Z, r25
+	PORTE_DIRSET = PIN1_bm;	//SCL output
+ 5e6:	82 e0       	ldi	r24, 0x02	; 2
+ 5e8:	80 83       	st	Z, r24
+	
+	//DDRB |= (1 << PB0);	// Set SDA as output
+	//DDRB |= (1 << PB2);	// Set SCL as output
+	
+	SDA_HIGH;
+ 5ea:	e0 e8       	ldi	r30, 0x80	; 128
+ 5ec:	f6 e0       	ldi	r31, 0x06	; 6
+ 5ee:	95 83       	std	Z+5, r25	; 0x05
+	SCL_HIGH;
+ 5f0:	85 83       	std	Z+5, r24	; 0x05
+ 5f2:	08 95       	ret
+
+000005f4 <i2c_clock>:
+}
+
+void i2c_clock()
+{
+	SCL_HIGH;
+ 5f4:	e0 e8       	ldi	r30, 0x80	; 128
+ 5f6:	f6 e0       	ldi	r31, 0x06	; 6
+ 5f8:	82 e0       	ldi	r24, 0x02	; 2
+ 5fa:	85 83       	std	Z+5, r24	; 0x05
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 5fc:	00 00       	nop
+	_delay_us(TIME);
+	SCL_LOW;
+ 5fe:	86 83       	std	Z+6, r24	; 0x06
+ 600:	08 95       	ret
+
+00000602 <i2c_start>:
+}
+
+void i2c_start()
+{
+	//Clock stays high and SDA pulled low
+	SDA_HIGH;
+ 602:	e0 e8       	ldi	r30, 0x80	; 128
+ 604:	f6 e0       	ldi	r31, 0x06	; 6
+ 606:	91 e0       	ldi	r25, 0x01	; 1
+ 608:	95 83       	std	Z+5, r25	; 0x05
+	SCL_HIGH;
+ 60a:	82 e0       	ldi	r24, 0x02	; 2
+ 60c:	85 83       	std	Z+5, r24	; 0x05
+ 60e:	00 00       	nop
+
+	_delay_us(TIME);
+	SDA_LOW;
+ 610:	96 83       	std	Z+6, r25	; 0x06
+ 612:	00 00       	nop
+	_delay_us(TIME);
+	SCL_LOW;
+ 614:	86 83       	std	Z+6, r24	; 0x06
+ 616:	08 95       	ret
+
+00000618 <i2c_stop>:
+}
+
+void i2c_stop()
+{
+	//clock goes low before data
+	SCL_LOW;
+ 618:	e0 e8       	ldi	r30, 0x80	; 128
+ 61a:	f6 e0       	ldi	r31, 0x06	; 6
+ 61c:	92 e0       	ldi	r25, 0x02	; 2
+ 61e:	96 83       	std	Z+6, r25	; 0x06
+	SDA_LOW;
+ 620:	81 e0       	ldi	r24, 0x01	; 1
+ 622:	86 83       	std	Z+6, r24	; 0x06
+ 624:	00 00       	nop
+	_delay_us(TIME);
+
+	SCL_HIGH;
+ 626:	95 83       	std	Z+5, r25	; 0x05
+ 628:	00 00       	nop
+	_delay_us(TIME);
+	SDA_HIGH;
+ 62a:	85 83       	std	Z+5, r24	; 0x05
+ 62c:	08 95       	ret
+
+0000062e <i2c_device_id>:
+}
+
+char i2c_device_id(volatile char id, volatile char rw)
+{
+ 62e:	ef 92       	push	r14
+ 630:	ff 92       	push	r15
+ 632:	0f 93       	push	r16
+ 634:	1f 93       	push	r17
+ 636:	cf 93       	push	r28
+ 638:	df 93       	push	r29
+ 63a:	00 d0       	rcall	.+0      	; 0x63c <i2c_device_id+0xe>
+ 63c:	cd b7       	in	r28, 0x3d	; 61
+ 63e:	de b7       	in	r29, 0x3e	; 62
+ 640:	89 83       	std	Y+1, r24	; 0x01
+ 642:	6a 83       	std	Y+2, r22	; 0x02
+	char i, ACK;
+	//id = 0x77;//0x76;//0x3C;//78;
+
+	//check if valid i2c address
+	if(id < 8 || id > 120)
+ 644:	89 81       	ldd	r24, Y+1	; 0x01
+ 646:	88 30       	cpi	r24, 0x08	; 8
+ 648:	a8 f1       	brcs	.+106    	; 0x6b4 <i2c_device_id+0x86>
+ 64a:	89 81       	ldd	r24, Y+1	; 0x01
+ 64c:	89 37       	cpi	r24, 0x79	; 121
+ 64e:	a0 f5       	brcc	.+104    	; 0x6b8 <i2c_device_id+0x8a>
+ 650:	17 e0       	ldi	r17, 0x07	; 7
+ 652:	10 c0       	rjmp	.+32     	; 0x674 <i2c_device_id+0x46>
+		return 2;
+
+	//Starting at 7 to avoid last bit
+	for(i = 7; i > 0; i--)
+	{
+		id <<= 1;
+ 654:	89 81       	ldd	r24, Y+1	; 0x01
+ 656:	88 0f       	add	r24, r24
+ 658:	89 83       	std	Y+1, r24	; 0x01
+		if((id & 0x80))
+ 65a:	89 81       	ldd	r24, Y+1	; 0x01
+ 65c:	88 23       	and	r24, r24
+ 65e:	24 f4       	brge	.+8      	; 0x668 <i2c_device_id+0x3a>
+			SDA_HIGH;
+ 660:	81 e0       	ldi	r24, 0x01	; 1
+ 662:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
+ 666:	03 c0       	rjmp	.+6      	; 0x66e <i2c_device_id+0x40>
+		else
+			SDA_LOW;
+ 668:	81 e0       	ldi	r24, 0x01	; 1
+ 66a:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
+		//SDA = id & 0x80;	//Sends a 1 or 0 to SDA
+
+		//Pulses the clock
+		i2c_clock();
+ 66e:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
+	//check if valid i2c address
+	if(id < 8 || id > 120)
+		return 2;
+
+	//Starting at 7 to avoid last bit
+	for(i = 7; i > 0; i--)
+ 672:	11 50       	subi	r17, 0x01	; 1
+ 674:	11 11       	cpse	r17, r1
+ 676:	ee cf       	rjmp	.-36     	; 0x654 <i2c_device_id+0x26>
+		i2c_clock();
+	}
+	//8th bit. pulses the read/write bit
+	//rw low for write and high for read
+
+	if(rw == 1)
+ 678:	8a 81       	ldd	r24, Y+2	; 0x02
+ 67a:	81 30       	cpi	r24, 0x01	; 1
+ 67c:	19 f4       	brne	.+6      	; 0x684 <i2c_device_id+0x56>
+		SDA_HIGH;
+ 67e:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
+ 682:	03 c0       	rjmp	.+6      	; 0x68a <i2c_device_id+0x5c>
+	else
+		SDA_LOW;
+ 684:	81 e0       	ldi	r24, 0x01	; 1
+ 686:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
+	i2c_clock();
+ 68a:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
+	//SDA = rw;
+	
+	//9th bit
+	//set SDA to input
+	PORTE.DIRCLR = PIN0_bm;
+ 68e:	0f 2e       	mov	r0, r31
+ 690:	f0 e8       	ldi	r31, 0x80	; 128
+ 692:	ef 2e       	mov	r14, r31
+ 694:	f6 e0       	ldi	r31, 0x06	; 6
+ 696:	ff 2e       	mov	r15, r31
+ 698:	f0 2d       	mov	r31, r0
+ 69a:	01 e0       	ldi	r16, 0x01	; 1
+ 69c:	f7 01       	movw	r30, r14
+ 69e:	02 83       	std	Z+2, r16	; 0x02
+	//DDRB &= ~(1 << PB0);	//set pin0 to input; turn off pin
+	SDA_HIGH;//PORTB |= (1 << PB0);	//enable pull up; turn on pin
+ 6a0:	05 83       	std	Z+5, r16	; 0x05
+	ACK = (PORTE.IN & PIN0_bm); //(PINB & (1 << PB0));	//read pin
+ 6a2:	80 85       	ldd	r24, Z+8	; 0x08
+ 6a4:	18 2f       	mov	r17, r24
+ 6a6:	11 70       	andi	r17, 0x01	; 1
+
+	i2c_clock();
+ 6a8:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
+	
+	PORTE.DIRSET = PIN0_bm;
+ 6ac:	f7 01       	movw	r30, r14
+ 6ae:	01 83       	std	Z+1, r16	; 0x01
+	//DDRB |= (1 << PB0);	//set pin0 to output
+
+	return ACK;
+ 6b0:	81 2f       	mov	r24, r17
+ 6b2:	03 c0       	rjmp	.+6      	; 0x6ba <i2c_device_id+0x8c>
+	char i, ACK;
+	//id = 0x77;//0x76;//0x3C;//78;
+
+	//check if valid i2c address
+	if(id < 8 || id > 120)
+		return 2;
+ 6b4:	82 e0       	ldi	r24, 0x02	; 2
+ 6b6:	01 c0       	rjmp	.+2      	; 0x6ba <i2c_device_id+0x8c>
+ 6b8:	82 e0       	ldi	r24, 0x02	; 2
+	
+	PORTE.DIRSET = PIN0_bm;
+	//DDRB |= (1 << PB0);	//set pin0 to output
+
+	return ACK;
+}
+ 6ba:	0f 90       	pop	r0
+ 6bc:	0f 90       	pop	r0
+ 6be:	df 91       	pop	r29
+ 6c0:	cf 91       	pop	r28
+ 6c2:	1f 91       	pop	r17
+ 6c4:	0f 91       	pop	r16
+ 6c6:	ff 90       	pop	r15
+ 6c8:	ef 90       	pop	r14
+ 6ca:	08 95       	ret
+
+000006cc <i2c_read>:
+
+unsigned char i2c_read(char last_byte)
+{
+ 6cc:	1f 93       	push	r17
+ 6ce:	cf 93       	push	r28
+ 6d0:	df 93       	push	r29
+ 6d2:	18 2f       	mov	r17, r24
+	char i = 0, byte = 0;
+	SDA_HIGH;
+ 6d4:	e0 e8       	ldi	r30, 0x80	; 128
+ 6d6:	f6 e0       	ldi	r31, 0x06	; 6
+ 6d8:	81 e0       	ldi	r24, 0x01	; 1
+ 6da:	85 83       	std	Z+5, r24	; 0x05
+	
+	PORTE.DIRCLR = PIN0_bm;
+ 6dc:	82 83       	std	Z+2, r24	; 0x02
+	//DDRB &= ~(1 << PB0);	//set pin0 to input; turn off pin
+	SDA_HIGH;				//enable pull up; turn on pin
+ 6de:	85 83       	std	Z+5, r24	; 0x05
+	return ACK;
+}
+
+unsigned char i2c_read(char last_byte)
+{
+	char i = 0, byte = 0;
+ 6e0:	c0 e0       	ldi	r28, 0x00	; 0
+	
+	PORTE.DIRCLR = PIN0_bm;
+	//DDRB &= ~(1 << PB0);	//set pin0 to input; turn off pin
+	SDA_HIGH;				//enable pull up; turn on pin
+	
+	for(i = 8; i > 0; i--)
+ 6e2:	d8 e0       	ldi	r29, 0x08	; 8
+ 6e4:	0b c0       	rjmp	.+22     	; 0x6fc <i2c_read+0x30>
+	{	
+		SCL_HIGH;
+ 6e6:	e0 e8       	ldi	r30, 0x80	; 128
+ 6e8:	f6 e0       	ldi	r31, 0x06	; 6
+ 6ea:	82 e0       	ldi	r24, 0x02	; 2
+ 6ec:	85 83       	std	Z+5, r24	; 0x05
+		//bitshift byte by 1
+		byte <<= 1;
+ 6ee:	cc 0f       	add	r28, r28
+
+		//read pin
+		
+		//OR byte bit with SDA
+		byte |= PORTE.IN & PIN0_bm;//(PINB & (1<<PB0));
+ 6f0:	80 85       	ldd	r24, Z+8	; 0x08
+ 6f2:	81 70       	andi	r24, 0x01	; 1
+ 6f4:	c8 2b       	or	r28, r24
+
+		i2c_clock();
+ 6f6:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
+	
+	PORTE.DIRCLR = PIN0_bm;
+	//DDRB &= ~(1 << PB0);	//set pin0 to input; turn off pin
+	SDA_HIGH;				//enable pull up; turn on pin
+	
+	for(i = 8; i > 0; i--)
+ 6fa:	d1 50       	subi	r29, 0x01	; 1
+ 6fc:	d1 11       	cpse	r29, r1
+ 6fe:	f3 cf       	rjmp	.-26     	; 0x6e6 <i2c_read+0x1a>
+		//OR byte bit with SDA
+		byte |= PORTE.IN & PIN0_bm;//(PINB & (1<<PB0));
+
+		i2c_clock();
+	}
+	PORTE.DIRSET = PIN0_bm;
+ 700:	81 e0       	ldi	r24, 0x01	; 1
+ 702:	80 93 81 06 	sts	0x0681, r24	; 0x800681 <__TEXT_REGION_LENGTH__+0x700681>
+	//DDRB |= (1 << PB0);	//set pin0 to output
+	
+	//9th bit master acknowledges data transfer or indicates last byte
+	if(last_byte == 1)
+ 706:	11 30       	cpi	r17, 0x01	; 1
+ 708:	19 f4       	brne	.+6      	; 0x710 <i2c_read+0x44>
+		SDA_HIGH;
+ 70a:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
+ 70e:	03 c0       	rjmp	.+6      	; 0x716 <i2c_read+0x4a>
+	else
+		SDA_LOW;
+ 710:	81 e0       	ldi	r24, 0x01	; 1
+ 712:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
 	//SDA = last_byte;
 	
 	i2c_clock();
+ 716:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
 	
 	return byte;
 }
- 2ce:	e1 e8       	ldi	r30, 0x81	; 129
- 2d0:	f6 e0       	ldi	r31, 0x06	; 6
- 2d2:	91 e0       	ldi	r25, 0x01	; 1
- 2d4:	90 83       	st	Z, r25
- 2d6:	82 e0       	ldi	r24, 0x02	; 2
- 2d8:	80 83       	st	Z, r24
- 2da:	e0 e8       	ldi	r30, 0x80	; 128
- 2dc:	f6 e0       	ldi	r31, 0x06	; 6
- 2de:	95 83       	std	Z+5, r25	; 0x05
- 2e0:	85 83       	std	Z+5, r24	; 0x05
- 2e2:	08 95       	ret
+ 71a:	8c 2f       	mov	r24, r28
+ 71c:	df 91       	pop	r29
+ 71e:	cf 91       	pop	r28
+ 720:	1f 91       	pop	r17
+ 722:	08 95       	ret
 
-000002e4 <i2c_clock>:
- 2e4:	e0 e8       	ldi	r30, 0x80	; 128
- 2e6:	f6 e0       	ldi	r31, 0x06	; 6
- 2e8:	82 e0       	ldi	r24, 0x02	; 2
- 2ea:	85 83       	std	Z+5, r24	; 0x05
- 2ec:	00 00       	nop
- 2ee:	86 83       	std	Z+6, r24	; 0x06
- 2f0:	08 95       	ret
-
-000002f2 <i2c_start>:
- 2f2:	e0 e8       	ldi	r30, 0x80	; 128
- 2f4:	f6 e0       	ldi	r31, 0x06	; 6
- 2f6:	91 e0       	ldi	r25, 0x01	; 1
- 2f8:	95 83       	std	Z+5, r25	; 0x05
- 2fa:	82 e0       	ldi	r24, 0x02	; 2
- 2fc:	85 83       	std	Z+5, r24	; 0x05
- 2fe:	00 00       	nop
- 300:	96 83       	std	Z+6, r25	; 0x06
- 302:	00 00       	nop
- 304:	86 83       	std	Z+6, r24	; 0x06
- 306:	08 95       	ret
-
-00000308 <i2c_stop>:
- 308:	e0 e8       	ldi	r30, 0x80	; 128
- 30a:	f6 e0       	ldi	r31, 0x06	; 6
- 30c:	92 e0       	ldi	r25, 0x02	; 2
- 30e:	96 83       	std	Z+6, r25	; 0x06
- 310:	81 e0       	ldi	r24, 0x01	; 1
- 312:	86 83       	std	Z+6, r24	; 0x06
- 314:	00 00       	nop
- 316:	95 83       	std	Z+5, r25	; 0x05
- 318:	00 00       	nop
- 31a:	85 83       	std	Z+5, r24	; 0x05
- 31c:	08 95       	ret
-
-0000031e <i2c_device_id>:
- 31e:	ef 92       	push	r14
- 320:	ff 92       	push	r15
- 322:	0f 93       	push	r16
- 324:	1f 93       	push	r17
- 326:	cf 93       	push	r28
- 328:	df 93       	push	r29
- 32a:	00 d0       	rcall	.+0      	; 0x32c <i2c_device_id+0xe>
- 32c:	cd b7       	in	r28, 0x3d	; 61
- 32e:	de b7       	in	r29, 0x3e	; 62
- 330:	89 83       	std	Y+1, r24	; 0x01
- 332:	6a 83       	std	Y+2, r22	; 0x02
- 334:	89 81       	ldd	r24, Y+1	; 0x01
- 336:	88 30       	cpi	r24, 0x08	; 8
- 338:	a8 f1       	brcs	.+106    	; 0x3a4 <i2c_device_id+0x86>
- 33a:	89 81       	ldd	r24, Y+1	; 0x01
- 33c:	89 37       	cpi	r24, 0x79	; 121
- 33e:	a0 f5       	brcc	.+104    	; 0x3a8 <i2c_device_id+0x8a>
- 340:	17 e0       	ldi	r17, 0x07	; 7
- 342:	10 c0       	rjmp	.+32     	; 0x364 <i2c_device_id+0x46>
- 344:	89 81       	ldd	r24, Y+1	; 0x01
- 346:	88 0f       	add	r24, r24
- 348:	89 83       	std	Y+1, r24	; 0x01
- 34a:	89 81       	ldd	r24, Y+1	; 0x01
- 34c:	88 23       	and	r24, r24
- 34e:	24 f4       	brge	.+8      	; 0x358 <i2c_device_id+0x3a>
- 350:	81 e0       	ldi	r24, 0x01	; 1
- 352:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
- 356:	03 c0       	rjmp	.+6      	; 0x35e <i2c_device_id+0x40>
- 358:	81 e0       	ldi	r24, 0x01	; 1
- 35a:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
- 35e:	0e 94 72 01 	call	0x2e4	; 0x2e4 <i2c_clock>
- 362:	11 50       	subi	r17, 0x01	; 1
- 364:	11 11       	cpse	r17, r1
- 366:	ee cf       	rjmp	.-36     	; 0x344 <i2c_device_id+0x26>
- 368:	8a 81       	ldd	r24, Y+2	; 0x02
- 36a:	81 30       	cpi	r24, 0x01	; 1
- 36c:	19 f4       	brne	.+6      	; 0x374 <i2c_device_id+0x56>
- 36e:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
- 372:	03 c0       	rjmp	.+6      	; 0x37a <i2c_device_id+0x5c>
- 374:	81 e0       	ldi	r24, 0x01	; 1
- 376:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
- 37a:	0e 94 72 01 	call	0x2e4	; 0x2e4 <i2c_clock>
- 37e:	0f 2e       	mov	r0, r31
- 380:	f0 e8       	ldi	r31, 0x80	; 128
- 382:	ef 2e       	mov	r14, r31
- 384:	f6 e0       	ldi	r31, 0x06	; 6
- 386:	ff 2e       	mov	r15, r31
- 388:	f0 2d       	mov	r31, r0
- 38a:	01 e0       	ldi	r16, 0x01	; 1
- 38c:	f7 01       	movw	r30, r14
- 38e:	02 83       	std	Z+2, r16	; 0x02
- 390:	05 83       	std	Z+5, r16	; 0x05
- 392:	80 85       	ldd	r24, Z+8	; 0x08
- 394:	18 2f       	mov	r17, r24
- 396:	11 70       	andi	r17, 0x01	; 1
- 398:	0e 94 72 01 	call	0x2e4	; 0x2e4 <i2c_clock>
- 39c:	f7 01       	movw	r30, r14
- 39e:	01 83       	std	Z+1, r16	; 0x01
- 3a0:	81 2f       	mov	r24, r17
- 3a2:	03 c0       	rjmp	.+6      	; 0x3aa <i2c_device_id+0x8c>
- 3a4:	82 e0       	ldi	r24, 0x02	; 2
- 3a6:	01 c0       	rjmp	.+2      	; 0x3aa <i2c_device_id+0x8c>
- 3a8:	82 e0       	ldi	r24, 0x02	; 2
- 3aa:	0f 90       	pop	r0
- 3ac:	0f 90       	pop	r0
- 3ae:	df 91       	pop	r29
- 3b0:	cf 91       	pop	r28
- 3b2:	1f 91       	pop	r17
- 3b4:	0f 91       	pop	r16
- 3b6:	ff 90       	pop	r15
- 3b8:	ef 90       	pop	r14
- 3ba:	08 95       	ret
-
-000003bc <i2c_write>:
+00000724 <i2c_write>:
 
 void i2c_write(unsigned char byte)
 {
- 3bc:	cf 93       	push	r28
- 3be:	df 93       	push	r29
- 3c0:	d8 2f       	mov	r29, r24
+ 724:	cf 93       	push	r28
+ 726:	df 93       	push	r29
+ 728:	d8 2f       	mov	r29, r24
 	char i;
 	for(i = 8; i > 0; i--)
- 3c2:	c8 e0       	ldi	r28, 0x08	; 8
- 3c4:	0d c0       	rjmp	.+26     	; 0x3e0 <i2c_write+0x24>
+ 72a:	c8 e0       	ldi	r28, 0x08	; 8
+ 72c:	0d c0       	rjmp	.+26     	; 0x748 <i2c_write+0x24>
 	{
 		//bit shifts data by i and ANDs it to convert it to boolean
 		if((byte & 0x80))
- 3c6:	dd 23       	and	r29, r29
- 3c8:	24 f4       	brge	.+8      	; 0x3d2 <i2c_write+0x16>
+ 72e:	dd 23       	and	r29, r29
+ 730:	24 f4       	brge	.+8      	; 0x73a <i2c_write+0x16>
 			SDA_HIGH;
- 3ca:	81 e0       	ldi	r24, 0x01	; 1
- 3cc:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
- 3d0:	03 c0       	rjmp	.+6      	; 0x3d8 <i2c_write+0x1c>
+ 732:	81 e0       	ldi	r24, 0x01	; 1
+ 734:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
+ 738:	03 c0       	rjmp	.+6      	; 0x740 <i2c_write+0x1c>
 		else
 			SDA_LOW;
- 3d2:	81 e0       	ldi	r24, 0x01	; 1
- 3d4:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
+ 73a:	81 e0       	ldi	r24, 0x01	; 1
+ 73c:	80 93 86 06 	sts	0x0686, r24	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
 		//SDA = byte & 0x80;	//Sends a 1 or 0 to SDA
 		
 		//pulse the clock
 		i2c_clock();
- 3d8:	0e 94 72 01 	call	0x2e4	; 0x2e4 <i2c_clock>
+ 740:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
 		
 		byte <<= 1;
- 3dc:	dd 0f       	add	r29, r29
+ 744:	dd 0f       	add	r29, r29
 }
 
 void i2c_write(unsigned char byte)
 {
 	char i;
 	for(i = 8; i > 0; i--)
- 3de:	c1 50       	subi	r28, 0x01	; 1
- 3e0:	c1 11       	cpse	r28, r1
- 3e2:	f1 cf       	rjmp	.-30     	; 0x3c6 <i2c_write+0xa>
+ 746:	c1 50       	subi	r28, 0x01	; 1
+ 748:	c1 11       	cpse	r28, r1
+ 74a:	f1 cf       	rjmp	.-30     	; 0x72e <i2c_write+0xa>
 		
 		byte <<= 1;
 	}
 	
 	//set to high to detect ack bit
 	SDA_HIGH;
- 3e4:	81 e0       	ldi	r24, 0x01	; 1
- 3e6:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
+ 74c:	81 e0       	ldi	r24, 0x01	; 1
+ 74e:	80 93 85 06 	sts	0x0685, r24	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
 	
 	i2c_clock();
- 3ea:	0e 94 72 01 	call	0x2e4	; 0x2e4 <i2c_clock>
+ 752:	0e 94 fa 02 	call	0x5f4	; 0x5f4 <i2c_clock>
 
 }
- 3ee:	df 91       	pop	r29
- 3f0:	cf 91       	pop	r28
- 3f2:	08 95       	ret
+ 756:	df 91       	pop	r29
+ 758:	cf 91       	pop	r28
+ 75a:	08 95       	ret
 
-000003f4 <main>:
+0000075c <main>:
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 3f4:	2f e3       	ldi	r18, 0x3F	; 63
- 3f6:	8d e0       	ldi	r24, 0x0D	; 13
- 3f8:	93 e0       	ldi	r25, 0x03	; 3
- 3fa:	21 50       	subi	r18, 0x01	; 1
- 3fc:	80 40       	sbci	r24, 0x00	; 0
- 3fe:	90 40       	sbci	r25, 0x00	; 0
- 400:	e1 f7       	brne	.-8      	; 0x3fa <main+0x6>
- 402:	00 c0       	rjmp	.+0      	; 0x404 <__LOCK_REGION_LENGTH__+0x4>
- 404:	00 00       	nop
-{
+ 75c:	2f e3       	ldi	r18, 0x3F	; 63
+ 75e:	8d e0       	ldi	r24, 0x0D	; 13
+ 760:	93 e0       	ldi	r25, 0x03	; 3
+ 762:	21 50       	subi	r18, 0x01	; 1
+ 764:	80 40       	sbci	r24, 0x00	; 0
+ 766:	90 40       	sbci	r25, 0x00	; 0
+ 768:	e1 f7       	brne	.-8      	; 0x762 <main+0x6>
+ 76a:	00 c0       	rjmp	.+0      	; 0x76c <main+0x10>
+ 76c:	00 00       	nop
 	
-	const unsigned char time[7] = {00,0x12,0x20,1,1,1,1};
+	const unsigned char time[7] = {0x50,0x59,0x20,1,1,1,1}; //{00,0x12,0x20,1,1,1,1};
+	unsigned char *test;
 	_delay_ms(500);	//delay to let voltage stabalise
 	
 	initDisplay();
- 406:	0e 94 1d 01 	call	0x23a	; 0x23a <initDisplay>
+ 76e:	0e 94 62 01 	call	0x2c4	; 0x2c4 <initDisplay>
 	
 	initShiftReg();
- 40a:	0e 94 63 02 	call	0x4c6	; 0x4c6 <initShiftReg>
+ 772:	0e 94 0e 04 	call	0x81c	; 0x81c <initShiftReg>
 	init_i2c();
- 40e:	0e 94 67 01 	call	0x2ce	; 0x2ce <init_i2c>
+ 776:	0e 94 ef 02 	call	0x5de	; 0x5de <init_i2c>
 	rtc_init();
- 412:	0e 94 4e 01 	call	0x29c	; 0x29c <rtc_init>
+ 77a:	0e 94 96 02 	call	0x52c	; 0x52c <rtc_init>
+	//sht_init();
 	
 	// set square wave to 1Hz, enable squarewave output
 	rtc_ctrl(0x00);
- 416:	80 e0       	ldi	r24, 0x00	; 0
- 418:	0e 94 55 01 	call	0x2aa	; 0x2aa <rtc_ctrl>
+ 77e:	80 e0       	ldi	r24, 0x00	; 0
+ 780:	0e 94 dd 02 	call	0x5ba	; 0x5ba <rtc_ctrl>
 	
-	sendData(LAMPHH | LAMPMM, 0);
- 41c:	60 e0       	ldi	r22, 0x00	; 0
- 41e:	80 ec       	ldi	r24, 0xC0	; 192
- 420:	0e 94 30 02 	call	0x460	; 0x460 <sendData>
+	sendData(LAMPHH | LAMPMM | LAMPAMPM, 0);
+ 784:	60 e0       	ldi	r22, 0x00	; 0
+ 786:	80 ee       	ldi	r24, 0xE0	; 224
+ 788:	0e 94 db 03 	call	0x7b6	; 0x7b6 <sendData>
+	
+	clearDisplay();
+ 78c:	0e 94 74 01 	call	0x2e8	; 0x2e8 <clearDisplay>
 
 	//rtc_set_time(time);
-	unsigned char i = 0;
- 424:	c0 e0       	ldi	r28, 0x00	; 0
-		
-		//if( a > 20000 && a < 30000)
-	//	{
-		//	cathodeRefresh();
-	//	}
+	//unsigned char i = 0;
+    while (1) 
+    {	
 		if(PORTD.IN & PULSE)
- 426:	80 91 68 06 	lds	r24, 0x0668	; 0x800668 <__TEXT_REGION_LENGTH__+0x700668>
- 42a:	85 ff       	sbrs	r24, 5
- 42c:	fc cf       	rjmp	.-8      	; 0x426 <__LOCK_REGION_LENGTH__+0x26>
+ 790:	80 91 68 06 	lds	r24, 0x0668	; 0x800668 <__TEXT_REGION_LENGTH__+0x700668>
+ 794:	85 ff       	sbrs	r24, 5
+ 796:	fc cf       	rjmp	.-8      	; 0x790 <main+0x34>
+ 798:	8f e4       	ldi	r24, 0x4F	; 79
+ 79a:	93 ec       	ldi	r25, 0xC3	; 195
+ 79c:	01 97       	sbiw	r24, 0x01	; 1
+ 79e:	f1 f7       	brne	.-4      	; 0x79c <main+0x40>
+ 7a0:	00 c0       	rjmp	.+0      	; 0x7a2 <main+0x46>
+ 7a2:	00 00       	nop
 		{
+			//print_float(sht_temp());
+			//print_float(sht_humidity());
+			_delay_ms(100);
 			
-			characterTube(i);
- 42e:	8c 2f       	mov	r24, r28
- 430:	0e 94 2c 01 	call	0x258	; 0x258 <characterTube>
-			i = (i + 1) % 0x10;
- 434:	8c 2f       	mov	r24, r28
- 436:	90 e0       	ldi	r25, 0x00	; 0
- 438:	01 96       	adiw	r24, 0x01	; 1
- 43a:	8f 70       	andi	r24, 0x0F	; 15
- 43c:	90 78       	andi	r25, 0x80	; 128
- 43e:	99 23       	and	r25, r25
- 440:	24 f4       	brge	.+8      	; 0x44a <__LOCK_REGION_LENGTH__+0x4a>
- 442:	01 97       	sbiw	r24, 0x01	; 1
- 444:	80 6f       	ori	r24, 0xF0	; 240
- 446:	9f 6f       	ori	r25, 0xFF	; 255
- 448:	01 96       	adiw	r24, 0x01	; 1
- 44a:	c8 2f       	mov	r28, r24
- 44c:	2f ef       	ldi	r18, 0xFF	; 255
- 44e:	80 e7       	ldi	r24, 0x70	; 112
- 450:	92 e0       	ldi	r25, 0x02	; 2
- 452:	21 50       	subi	r18, 0x01	; 1
- 454:	80 40       	sbci	r24, 0x00	; 0
- 456:	90 40       	sbci	r25, 0x00	; 0
- 458:	e1 f7       	brne	.-8      	; 0x452 <__LOCK_REGION_LENGTH__+0x52>
- 45a:	00 c0       	rjmp	.+0      	; 0x45c <__LOCK_REGION_LENGTH__+0x5c>
- 45c:	00 00       	nop
- 45e:	e3 cf       	rjmp	.-58     	; 0x426 <__LOCK_REGION_LENGTH__+0x26>
+			test = rtc_get_time();
+ 7a4:	0e 94 a8 02 	call	0x550	; 0x550 <rtc_get_time>
+ 7a8:	ec 01       	movw	r28, r24
+			convertTime(test);
+ 7aa:	0e 94 46 02 	call	0x48c	; 0x48c <convertTime>
+			
+			checkRefesh(test);	// flash screen every hour
+ 7ae:	ce 01       	movw	r24, r28
+ 7b0:	0e 94 2a 02 	call	0x454	; 0x454 <checkRefesh>
+ 7b4:	ed cf       	rjmp	.-38     	; 0x790 <main+0x34>
 
-00000460 <sendData>:
+000007b6 <sendData>:
 void sendData(unsigned char byte, unsigned char bit)
 {
 	unsigned char i;
 	static unsigned char last_command;	// keeps track of set bits in shift register
 	
 	if(bit)
- 460:	66 23       	and	r22, r22
- 462:	41 f0       	breq	.+16     	; 0x474 <sendData+0x14>
+ 7b6:	66 23       	and	r22, r22
+ 7b8:	41 f0       	breq	.+16     	; 0x7ca <sendData+0x14>
 	{
 		/* invert byte then AND with the last_command, preserving contents of 
 		last_command so only set pins become cleared*/
 		last_command &= ~byte;
- 464:	80 95       	com	r24
- 466:	90 91 00 20 	lds	r25, 0x2000	; 0x802000 <__data_end>
- 46a:	89 23       	and	r24, r25
- 46c:	80 93 00 20 	sts	0x2000, r24	; 0x802000 <__data_end>
+ 7ba:	80 95       	com	r24
+ 7bc:	90 91 1f 20 	lds	r25, 0x201F	; 0x80201f <last_command.3938>
+ 7c0:	89 23       	and	r24, r25
+ 7c2:	80 93 1f 20 	sts	0x201F, r24	; 0x80201f <last_command.3938>
 				
 	E.G.	sendData(0x01, 0) turns ON the 8th bit of the shift register
 			sendData(0x01, 1) clears the 8th bit in the shift register
 */
 void sendData(unsigned char byte, unsigned char bit)
 {
- 470:	20 e0       	ldi	r18, 0x00	; 0
- 472:	1d c0       	rjmp	.+58     	; 0x4ae <sendData+0x4e>
+ 7c6:	20 e0       	ldi	r18, 0x00	; 0
+ 7c8:	1d c0       	rjmp	.+58     	; 0x804 <sendData+0x4e>
 		byte = last_command;	//byte is destructive, so copy
 	}
 	else
 	{
 		//copy byte data into last_command
 		last_command |= byte;
- 474:	90 91 00 20 	lds	r25, 0x2000	; 0x802000 <__data_end>
- 478:	98 2b       	or	r25, r24
- 47a:	90 93 00 20 	sts	0x2000, r25	; 0x802000 <__data_end>
+ 7ca:	90 91 1f 20 	lds	r25, 0x201F	; 0x80201f <last_command.3938>
+ 7ce:	98 2b       	or	r25, r24
+ 7d0:	90 93 1f 20 	sts	0x201F, r25	; 0x80201f <last_command.3938>
 	
 		//copy last_commands data back into byte
 		byte |= last_command;
- 47e:	89 2b       	or	r24, r25
- 480:	f7 cf       	rjmp	.-18     	; 0x470 <sendData+0x10>
+ 7d4:	89 2b       	or	r24, r25
+ 7d6:	f7 cf       	rjmp	.-18     	; 0x7c6 <sendData+0x10>
 	}
 	
 	// send byte to shift register, Big-endian
 	for (i = 0; i < 8; i++)
 	{
 		if((byte & 0x01))	//read first bit
- 482:	80 ff       	sbrs	r24, 0
- 484:	03 c0       	rjmp	.+6      	; 0x48c <sendData+0x2c>
+ 7d8:	80 ff       	sbrs	r24, 0
+ 7da:	03 c0       	rjmp	.+6      	; 0x7e2 <sendData+0x2c>
 			PORTE.OUTSET = SHIFTDATA;	//Set DATA pin to HIGH
- 486:	98 e0       	ldi	r25, 0x08	; 8
- 488:	90 93 85 06 	sts	0x0685, r25	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
+ 7dc:	98 e0       	ldi	r25, 0x08	; 8
+ 7de:	90 93 85 06 	sts	0x0685, r25	; 0x800685 <__TEXT_REGION_LENGTH__+0x700685>
 			
 		PORTD.OUTSET = SHIFTCLK;	//set CLK pin to HIGH
- 48c:	e0 e6       	ldi	r30, 0x60	; 96
- 48e:	f6 e0       	ldi	r31, 0x06	; 6
- 490:	98 e0       	ldi	r25, 0x08	; 8
- 492:	95 83       	std	Z+5, r25	; 0x05
+ 7e2:	e0 e6       	ldi	r30, 0x60	; 96
+ 7e4:	f6 e0       	ldi	r31, 0x06	; 6
+ 7e6:	98 e0       	ldi	r25, 0x08	; 8
+ 7e8:	95 83       	std	Z+5, r25	; 0x05
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 494:	33 e0       	ldi	r19, 0x03	; 3
- 496:	3a 95       	dec	r19
- 498:	f1 f7       	brne	.-4      	; 0x496 <sendData+0x36>
- 49a:	00 00       	nop
+ 7ea:	33 e0       	ldi	r19, 0x03	; 3
+ 7ec:	3a 95       	dec	r19
+ 7ee:	f1 f7       	brne	.-4      	; 0x7ec <sendData+0x36>
+ 7f0:	00 00       	nop
 		_delay_us(10);
 		
 		PORTE.OUTCLR = SHIFTDATA;	//Set DATA pin to LOW
- 49c:	90 93 86 06 	sts	0x0686, r25	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
+ 7f2:	90 93 86 06 	sts	0x0686, r25	; 0x800686 <__TEXT_REGION_LENGTH__+0x700686>
 		PORTD.OUTCLR = SHIFTCLK;	//set CLK pin to LOW
- 4a0:	96 83       	std	Z+6, r25	; 0x06
- 4a2:	93 e0       	ldi	r25, 0x03	; 3
- 4a4:	9a 95       	dec	r25
- 4a6:	f1 f7       	brne	.-4      	; 0x4a4 <sendData+0x44>
- 4a8:	00 00       	nop
+ 7f6:	96 83       	std	Z+6, r25	; 0x06
+ 7f8:	93 e0       	ldi	r25, 0x03	; 3
+ 7fa:	9a 95       	dec	r25
+ 7fc:	f1 f7       	brne	.-4      	; 0x7fa <sendData+0x44>
+ 7fe:	00 00       	nop
 		_delay_us(10);
 		
 		byte >>= 1;	// shift all bits down, removing first bit
- 4aa:	86 95       	lsr	r24
+ 800:	86 95       	lsr	r24
 		//copy last_commands data back into byte
 		byte |= last_command;
 	}
 	
 	// send byte to shift register, Big-endian
 	for (i = 0; i < 8; i++)
- 4ac:	2f 5f       	subi	r18, 0xFF	; 255
- 4ae:	28 30       	cpi	r18, 0x08	; 8
- 4b0:	40 f3       	brcs	.-48     	; 0x482 <sendData+0x22>
+ 802:	2f 5f       	subi	r18, 0xFF	; 255
+ 804:	28 30       	cpi	r18, 0x08	; 8
+ 806:	40 f3       	brcs	.-48     	; 0x7d8 <sendData+0x22>
 		_delay_us(10);
 		
 		byte >>= 1;	// shift all bits down, removing first bit
 	}
 	// tell shift register to activate
 	PORTE.OUTSET = LATCH;
- 4b2:	e0 e8       	ldi	r30, 0x80	; 128
- 4b4:	f6 e0       	ldi	r31, 0x06	; 6
- 4b6:	84 e0       	ldi	r24, 0x04	; 4
- 4b8:	85 83       	std	Z+5, r24	; 0x05
- 4ba:	33 e0       	ldi	r19, 0x03	; 3
- 4bc:	3a 95       	dec	r19
- 4be:	f1 f7       	brne	.-4      	; 0x4bc <sendData+0x5c>
- 4c0:	00 00       	nop
+ 808:	e0 e8       	ldi	r30, 0x80	; 128
+ 80a:	f6 e0       	ldi	r31, 0x06	; 6
+ 80c:	84 e0       	ldi	r24, 0x04	; 4
+ 80e:	85 83       	std	Z+5, r24	; 0x05
+ 810:	33 e0       	ldi	r19, 0x03	; 3
+ 812:	3a 95       	dec	r19
+ 814:	f1 f7       	brne	.-4      	; 0x812 <sendData+0x5c>
+ 816:	00 00       	nop
 	_delay_us(10);
 	PORTE.OUTCLR = LATCH;
- 4c2:	86 83       	std	Z+6, r24	; 0x06
- 4c4:	08 95       	ret
+ 818:	86 83       	std	Z+6, r24	; 0x06
+ 81a:	08 95       	ret
 
-000004c6 <initShiftReg>:
+0000081c <initShiftReg>:
 #include <avr/io.h>
 #include <util/delay.h>
 
 void initShiftReg()
 {
 	PORTD.DIRSET = SHIFTCLK;	//set SHIFTCLK pin to output
- 4c6:	88 e0       	ldi	r24, 0x08	; 8
- 4c8:	80 93 61 06 	sts	0x0661, r24	; 0x800661 <__TEXT_REGION_LENGTH__+0x700661>
+ 81c:	88 e0       	ldi	r24, 0x08	; 8
+ 81e:	80 93 61 06 	sts	0x0661, r24	; 0x800661 <__TEXT_REGION_LENGTH__+0x700661>
 	PORTE.DIRSET = LATCH | SHIFTDATA;	//set SHIFTCLK pin to output
- 4cc:	8c e0       	ldi	r24, 0x0C	; 12
- 4ce:	80 93 81 06 	sts	0x0681, r24	; 0x800681 <__TEXT_REGION_LENGTH__+0x700681>
+ 822:	8c e0       	ldi	r24, 0x0C	; 12
+ 824:	80 93 81 06 	sts	0x0681, r24	; 0x800681 <__TEXT_REGION_LENGTH__+0x700681>
 	sendData(0xFF, 1);	// ensure shift register is in known state
- 4d2:	61 e0       	ldi	r22, 0x01	; 1
- 4d4:	8f ef       	ldi	r24, 0xFF	; 255
- 4d6:	0e 94 30 02 	call	0x460	; 0x460 <sendData>
- 4da:	08 95       	ret
+ 828:	61 e0       	ldi	r22, 0x01	; 1
+ 82a:	8f ef       	ldi	r24, 0xFF	; 255
+ 82c:	0e 94 db 03 	call	0x7b6	; 0x7b6 <sendData>
+ 830:	08 95       	ret
 
-000004dc <_exit>:
- 4dc:	f8 94       	cli
+00000832 <_exit>:
+ 832:	f8 94       	cli
 
-000004de <__stop_program>:
- 4de:	ff cf       	rjmp	.-2      	; 0x4de <__stop_program>
+00000834 <__stop_program>:
+ 834:	ff cf       	rjmp	.-2      	; 0x834 <__stop_program>
