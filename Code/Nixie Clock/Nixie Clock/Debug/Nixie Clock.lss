@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000148  00000000  00000000  00000950  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000041c0  00000000  00000000  00000a98  2**0
+  6 .debug_info   000041f0  00000000  00000000  00000a98  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00002f04  00000000  00000000  00004c58  2**0
+  7 .debug_abbrev 00002ee6  00000000  00000000  00004c88  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001238  00000000  00000000  00007b5c  2**0
+  8 .debug_line   000012bc  00000000  00000000  00007b6e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000002e8  00000000  00000000  00008d94  2**2
+  9 .debug_frame  00000304  00000000  00000000  00008e2c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001fc0  00000000  00000000  0000907c  2**0
+ 10 .debug_str    00001fca  00000000  00000000  00009130  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000adc  00000000  00000000  0000b03c  2**0
+ 11 .debug_loc    00000b73  00000000  00000000  0000b0fa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000f8  00000000  00000000  0000bb18  2**0
+ 12 .debug_ranges 000000f8  00000000  00000000  0000bc6d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -753,7 +753,7 @@ void convertTime(unsigned char *number)
  50c:	82 2f       	mov	r24, r18
  50e:	89 1b       	sub	r24, r25
  510:	8a 83       	std	Y+2, r24	; 0x02
-	
+
 	//for cathodeRefresh/checkrefresh	BAD CODE
 	minute = *(number + 1);
  512:	30 93 20 20 	sts	0x2020, r19	; 0x802020 <minute>
@@ -787,9 +787,9 @@ void rtc_init()
  538:	08 95       	ret
 
 0000053a <bcdToDec>:
-	return ((convert / 10 * 16) + (convert % 10));
 }
 */
+
 unsigned char bcdToDec(unsigned char convert)
 {
 	return ((convert / 16 * 10) + (convert % 16));
@@ -1324,7 +1324,7 @@ void i2c_write(unsigned char byte)
  76a:	00 c0       	rjmp	.+0      	; 0x76c <main+0x10>
  76c:	00 00       	nop
 	
-	const unsigned char time[7] = {0x50,0x59,0x20,1,1,1,1}; //{00,0x12,0x20,1,1,1,1};
+	const unsigned char time[7] = {0,42,1,1,14,10,19}; //{seconds,minutes,hour,weekday,day,month,year};
 	unsigned char *test;
 	_delay_ms(500);	//delay to let voltage stabalise
 	
@@ -1351,12 +1351,12 @@ void i2c_write(unsigned char byte)
 	
 	clearDisplay();
  78c:	0e 94 74 01 	call	0x2e8	; 0x2e8 <clearDisplay>
-
-	//rtc_set_time(time);
+	//rtc_convert_time(time);
 	//unsigned char i = 0;
     while (1) 
     {	
-		if(PORTD.IN & PULSE)
+
+		if(PORTD.IN & PULSE)	//check if 1 second has passed
  790:	80 91 68 06 	lds	r24, 0x0668	; 0x800668 <__TEXT_REGION_LENGTH__+0x700668>
  794:	85 ff       	sbrs	r24, 5
  796:	fc cf       	rjmp	.-8      	; 0x790 <main+0x34>
@@ -1374,6 +1374,7 @@ void i2c_write(unsigned char byte)
 			test = rtc_get_time();
  7a4:	0e 94 a8 02 	call	0x550	; 0x550 <rtc_get_time>
  7a8:	ec 01       	movw	r28, r24
+			
 			convertTime(test);
  7aa:	0e 94 46 02 	call	0x48c	; 0x48c <convertTime>
 			

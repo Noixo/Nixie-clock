@@ -187,7 +187,7 @@ void convertTime(unsigned char *number)
 	
 	convert[0] = *(number + 2) / 10;	//Hh
 	convert[1] = *(number + 2) % 10;	//hH
-	
+
 	//for cathodeRefresh/checkrefresh	BAD CODE
 	minute = *(number + 1);
 	hour = *(number + 2);

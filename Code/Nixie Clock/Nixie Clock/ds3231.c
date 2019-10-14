@@ -15,6 +15,7 @@ unsigned char decToBcd(unsigned char convert)
 	return ((convert / 10 * 16) + (convert % 10));
 }
 */
+
 unsigned char bcdToDec(unsigned char convert)
 {
 	return ((convert / 16 * 10) + (convert % 16));
@@ -81,7 +82,57 @@ void rtc_set_time(unsigned char* setTime)
 //convert time from base 10 to DS3231 format and send it to rtc_set_time
 void rtc_convert_time(unsigned char *time)
 {
+	unsigned char rtcDecode[14] = {0};
+	//input protection
+	*(time) %= 60;	//seconds
+	*(time + 1) %= 60;	//minutes
+	*(time + 2) %= 24;	//hours
 	
+	*(time + 3) %= 7;	//week days
+	*(time + 4) %= 31;	//day
+	*(time + 5) %= 12;	//month
+	*(time + 6) %= 99;	//year
+	
+	rtcDecode[0] = (*(time) / 10) << 4;	//grab 10's value of a number and shifts it up for DS3231
+	rtcDecode[0] |= (*(time) % 10);	//grab 1's value of a number
+	
+	rtcDecode[1] = (*(time + 1) / 10) << 4;	//grab 10's value of a number and shifts it up for DS3231
+	rtcDecode[1] |= (*(time + 1) % 10);	//grab 1's value of a number
+	
+	rtcDecode[2] = (*(time + 2) / 10) << 3;
+	rtcDecode[2] |= (*(time + 2) % 10);
+	
+	//*(time + 3) = *(time + 3);
+	
+	rtcDecode[4] = (*(time + 4) / 10) << 4;	//grab 10's value of a number and shifts it up for DS3231
+	rtcDecode[4] |= (*(time + 4) % 10);	//grab 1's value of a number
+	
+	
+	//FIX MONTH AND YEAR
+	rtcDecode[5] = (*(time + 5) / 10) << 4;	//grab 10's value of a number and shifts it up for DS3231
+	rtcDecode[5] |= (*(time + 5) % 10);	//grab 1's value of a number
+	
+	rtcDecode[6] = (*(time + 6) / 10) << 4;	//grab 10's value of a number and shifts it up for DS3231
+	rtcDecode[6] |= (*(time + 6) % 10);	//grab 1's value of a number
+	
+	rtc_set_time(rtcDecode);
+}
+
+void rtc_daylight_savings(unsigned char *time)
+{
+	//SYDNEY
+	//if month is october
+	if(*(time + 5) == 10)
+	{
+		//if first sunday
+		if(*(time + 4))
+		{
+			if(*(time + 3) == 7)	//7 is sunday
+			{
+				
+			}
+		}
+	}
 }
 
 //void rtc_convert_

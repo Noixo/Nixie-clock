@@ -17,7 +17,7 @@
 #include "display.h"
 #include "sht20.h"
 
-#include "conf_usb.h"
+//#include "conf_usb.h"
 
 
 volatile unsigned char *p_time;
@@ -42,7 +42,7 @@ void print_float(float value)
 int main(void)
 {
 	
-	const unsigned char time[7] = {0x50,0x59,0x20,1,1,1,1}; //{00,0x12,0x20,1,1,1,1};
+	const unsigned char time[7] = {0,42,1,1,14,10,19}; //{seconds,minutes,hour,weekday,day,month,year};
 	unsigned char *test;
 	_delay_ms(500);	//delay to let voltage stabalise
 	
@@ -61,24 +61,11 @@ int main(void)
 	clearDisplay();
 
 	//rtc_set_time(time);
+	//rtc_convert_time(time);
 	//unsigned char i = 0;
     while (1) 
     {	
-		static bool my_flag_autorize_cdc_transfert = false;
-		char my_callback_cdc_enable(void)
-		{
-			my_flag_autorize_cdc_transfert = true;
-			return 1;
-		}
-		void my_callback_cdc_disable(void)
-		{
-			my_flag_autorize_cdc_transfert = 0;
-		}
-		void task(void)
-		{
-			if (my_flag_autorize_cdc_transfert) {
-				udi_cdc_putc('A');
-		
+
 		if(PORTD.IN & PULSE)	//check if 1 second has passed
 		{
 			//print_float(sht_temp());
@@ -86,6 +73,7 @@ int main(void)
 			_delay_ms(100);
 			
 			test = rtc_get_time();
+			
 			convertTime(test);
 			
 			checkRefesh(test);	// flash screen every hour

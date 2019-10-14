@@ -61,7 +61,7 @@ Discarded input sections
  .text.rtc_set_time
                 0x00000000       0x3c ds3231.o
  .text.rtc_convert_time
-                0x00000000        0x2 ds3231.o
+                0x00000000      0x1de ds3231.o
  .text          0x00000000        0x0 i2c.o
  .data          0x00000000        0x0 i2c.o
  .bss           0x00000000        0x0 i2c.o
@@ -793,62 +793,62 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x41c0
+.debug_info     0x00000000     0x41f0
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x284f C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
  .debug_info    0x0000284f      0x5de display.o
- .debug_info    0x00002e2d      0x4e4 ds3231.o
- .debug_info    0x00003311      0x5f7 i2c.o
- .debug_info    0x00003908      0x53f main.o
- .debug_info    0x00003e47      0x379 ShiftReg.o
+ .debug_info    0x00002e2d      0x514 ds3231.o
+ .debug_info    0x00003341      0x5f7 i2c.o
+ .debug_info    0x00003938      0x53f main.o
+ .debug_info    0x00003e77      0x379 ShiftReg.o
 
-.debug_abbrev   0x00000000     0x2f04
+.debug_abbrev   0x00000000     0x2ee6
  *(.debug_abbrev)
  .debug_abbrev  0x00000000     0x262c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
  .debug_abbrev  0x0000262c      0x1dc display.o
- .debug_abbrev  0x00002808      0x1a1 ds3231.o
- .debug_abbrev  0x000029a9      0x1f2 i2c.o
- .debug_abbrev  0x00002b9b      0x1ec main.o
- .debug_abbrev  0x00002d87      0x17d ShiftReg.o
+ .debug_abbrev  0x00002808      0x183 ds3231.o
+ .debug_abbrev  0x0000298b      0x1f2 i2c.o
+ .debug_abbrev  0x00002b7d      0x1ec main.o
+ .debug_abbrev  0x00002d69      0x17d ShiftReg.o
 
-.debug_line     0x00000000     0x1238
+.debug_line     0x00000000     0x12bc
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x391 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
  .debug_line    0x00000391      0x407 display.o
- .debug_line    0x00000798      0x22b ds3231.o
- .debug_line    0x000009c3      0x40b i2c.o
- .debug_line    0x00000dce      0x23f main.o
- .debug_line    0x0000100d      0x22b ShiftReg.o
+ .debug_line    0x00000798      0x2af ds3231.o
+ .debug_line    0x00000a47      0x40b i2c.o
+ .debug_line    0x00000e52      0x23f main.o
+ .debug_line    0x00001091      0x22b ShiftReg.o
 
-.debug_frame    0x00000000      0x2e8
+.debug_frame    0x00000000      0x304
  *(.debug_frame)
  .debug_frame   0x00000000       0xe4 display.o
- .debug_frame   0x000000e4       0xa0 ds3231.o
- .debug_frame   0x00000184       0xe0 i2c.o
- .debug_frame   0x00000264       0x50 main.o
- .debug_frame   0x000002b4       0x34 ShiftReg.o
+ .debug_frame   0x000000e4       0xbc ds3231.o
+ .debug_frame   0x000001a0       0xe0 i2c.o
+ .debug_frame   0x00000280       0x50 main.o
+ .debug_frame   0x000002d0       0x34 ShiftReg.o
 
-.debug_str      0x00000000     0x1fc0
+.debug_str      0x00000000     0x1fca
  *(.debug_str)
  .debug_str     0x00000000     0x1aa8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAA_DFP/1.1.68/gcc/dev/atxmega32a4u/avrxmega2/crtatxmega32a4u.o
  .debug_str     0x00001aa8      0x334 display.o
                                 0x377 (size before relaxing)
- .debug_str     0x00001ddc      0x140 ds3231.o
-                                0x3af (size before relaxing)
- .debug_str     0x00001f1c       0x43 i2c.o
+ .debug_str     0x00001ddc      0x14a ds3231.o
+                                0x3b9 (size before relaxing)
+ .debug_str     0x00001f26       0x43 i2c.o
                                 0x31c (size before relaxing)
- .debug_str     0x00001f5f       0x44 main.o
+ .debug_str     0x00001f69       0x44 main.o
                                 0x359 (size before relaxing)
- .debug_str     0x00001fa3       0x1d ShiftReg.o
+ .debug_str     0x00001fad       0x1d ShiftReg.o
                                 0x2d3 (size before relaxing)
 
-.debug_loc      0x00000000      0xadc
+.debug_loc      0x00000000      0xb73
  *(.debug_loc)
  .debug_loc     0x00000000      0x322 display.o
- .debug_loc     0x00000322      0x168 ds3231.o
- .debug_loc     0x0000048a      0x3fe i2c.o
- .debug_loc     0x00000888      0x166 main.o
- .debug_loc     0x000009ee       0xee ShiftReg.o
+ .debug_loc     0x00000322      0x1ff ds3231.o
+ .debug_loc     0x00000521      0x3fe i2c.o
+ .debug_loc     0x0000091f      0x166 main.o
+ .debug_loc     0x00000a85       0xee ShiftReg.o
 
 .debug_macinfo
  *(.debug_macinfo)
