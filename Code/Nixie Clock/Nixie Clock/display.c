@@ -66,7 +66,7 @@ void cathodeRefresh()
 		}
 		display(val);
 		characterTube(reMapBCDTube[i]);
-		_delay_ms(400);
+		_delay_ms(200);
 	}
 	
 	//turn off all digits
@@ -74,8 +74,14 @@ void cathodeRefresh()
 	
 	// dot point in each tube
 	DOTPOINTHIGH;
-	_delay_ms(400);
+	characterTube('c');	//dummy write to protect displays
+	_delay_ms(200);
 	DOTPOINTLOW;
+	//dummy write to protect displays
+	display(0);
+	characterTube(2);
+	
+	
 }
 
 void fifthTube(unsigned char byte)

@@ -74,9 +74,17 @@ int main(void)
 			
 			test = rtc_get_time();
 			
-			convertTime(test);
-			
-			checkRefesh(test);	// flash screen every hour
+			//if(*(test + 2) >= 11 || *(test + 2) < 6)	//if time is > 10pm
+			//{
+				//clearDisplay();
+		//	}
+			//else
+			//{
+				//cathodeRefresh();
+				convertTime(test);
+				
+				checkRefesh(test);	// flash screen every hour
+			//}
 			
 		}
     }
